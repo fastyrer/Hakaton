@@ -42,19 +42,19 @@ namespace Hakaton.LocationKit.Editor
                 if (clue != null)
                 {
                     EditorGUILayout.Space(); EditorGUILayout.LabelField("Улика для доски", EditorStyles.boldLabel);
-                    int id = EditorGUILayout.Popup("Тип предмета", Mathf.Clamp(clue.evidenceId, 0, 2), DemoGame.EvidenceTitles);
+                    int id = EditorGUILayout.Popup("Тип предмета", Mathf.Clamp(clue.evidenceId, 0, DemoGame.EvidenceTitles.Length - 1), DemoGame.EvidenceTitles);
                     if (id != clue.evidenceId && !EditorUtility.IsPersistent(piece))
                     {
                         Undo.RecordObject(clue, "Сменить улику");
                         string[] files = { "Family_photograph", "Unsent_letter", "Meeting_note" };
-                        var image = AssetDatabase.LoadAssetAtPath<Material>("Assets/Demo/Art/Generated/" + files[id] + ".mat");
+                        var image = AssetDatabase.LoadAssetAtPath<Material>("Assets/Demo/Art/Generated/" + files[id % 3] + ".mat");
                         clue.evidenceId = id; clue.label = "Взять / осмотреть · " + DemoGame.EvidenceTitles[id]; clue.illustration = image.mainTexture as Texture2D;
                         var surface = clue.transform.Find("Readable surface");
                         if (surface != null) { var renderer = surface.GetComponent<Renderer>(); Undo.RecordObject(renderer, "Иллюстрация улики"); renderer.sharedMaterial = image; PrefabUtility.RecordPrefabInstancePropertyModifications(renderer); }
                         PrefabUtility.RecordPrefabInstancePropertyModifications(clue);
                         LocationKitOperations.RefreshConnections(LocationKitOperations.CurrentRoot);
                     }
-                    EditorGUILayout.HelpBox("Доступны три готовых типа улик прототипа. Повторение одного типа не создаёт второй предмет инвентаря.", MessageType.Info);
+                    EditorGUILayout.HelpBox("Доступны улики дома и материалы архивного дела. Повторение одного типа не создаёт второй предмет инвентаря.", MessageType.Info);
                 }
                 if (piece.category == KitCategory.Lights)
                 {

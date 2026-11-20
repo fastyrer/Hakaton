@@ -1,0 +1,30 @@
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace Hakaton.Demo
+{
+    public static class InvestigationTravel
+    {
+        static int[] found;
+        static List<DetectiveBoard.Entry> entries;
+        static readonly Dictionary<int, Texture2D> images = new Dictionary<int, Texture2D>();
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        public static void Reset() { found = null; entries = null; images.Clear(); }
+        public static Texture2D Illustration(int id) => images.TryGetValue(id, out var image) ? image : null;
+        public static void Capture(DemoGame game)
+        {
+            found = new int[game.Found.Count]; game.Found.CopyTo(found);
+            entries = new List<DetectiveBoard.Entry>();
+            foreach (var entry in game.board.Entries) entries.Add(entry.Copy());
+            foreach (int id in found)
+            { var image = game.EvidenceIllustration(id); if (image != null) images[id] = image; }
+        }
+        public static void Restore(DemoGame game)
+        {
+            if (found == null) return;
+            foreach (int id in found) game.Found.Add(id);
+            game.board.RestoreEntries(entries);
+            found = null; entries = null;
+        }
+    }
+}

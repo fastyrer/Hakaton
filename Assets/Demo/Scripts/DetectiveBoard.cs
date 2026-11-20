@@ -38,6 +38,17 @@ namespace Hakaton.Demo
                 string.IsNullOrWhiteSpace(game.locationObjective) ? "Нью-Джерси. Октябрь 2000.\n\nРазобрать вещи отца. Проверить записи и даты в его кабинете." : game.locationObjective, -1, out _);
         }
 
+        public void RestoreEntries(IEnumerable<Entry> saved)
+        {
+            if (saved == null) return;
+            entries.Clear(); deleted.Clear(); sequence = 0;
+            foreach (var item in saved)
+            {
+                var copy = item.Copy(); copy.id = "card-" + (++sequence);
+                entries.Add(copy);
+            }
+        }
+
         public Entry Find(string id) => entries.Find(e => e.id == id);
         public bool HasEvidence(int sourceId) => entries.Exists(e => e.isEvidence && e.sourceId == sourceId);
         public bool Owns(int sourceId) => game != null && sourceId >= 0 &&

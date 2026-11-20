@@ -36,7 +36,7 @@ public static class VerifyBoard
         try
         {
             Check(game.Found.Count == 0 && game.board.Entries.Count == 1, "Fresh game has case note and empty inventory");
-            Check(game.evidence.Length == 3 && game.evidence.All(e => e != null && e.illustration != null), "All three world clues have inventory data and illustrations");
+            Check(game.evidence.Length >= 3 && game.evidence.Take(3).All(e => e != null && e.illustration != null), "All three world clues have inventory data and illustrations");
             ClickText(game.arrivalScene ? "НАЧАТЬ" : "ВОЙТИ В ДОМ"); await Frames(3);
             await Tap(Key.Tab);
             Check(game.hud.Mode == DemoHud.Screen.Board && View != null && Time.timeScale == 0, "Tab opens detective board and pauses world");

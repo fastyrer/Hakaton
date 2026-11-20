@@ -1,0 +1,35 @@
+PASS — 2026-11-20 12:44:12Z
+PASS  Play loop advances
+PASS  Custom station introduction and objective are connected
+PASS  Station contains 32 NPCs
+PASS  Patrolling NPC actually moves
+PASS  Living Bones plays on arrival through headphones
+PASS  Headphone music remains non-spatial
+PASS  Arrival starts outdoors in rain
+PASS  Entrance door is reachable and closed
+PASS  Entrance door blocks movement while closed
+PASS  E opens the station entrance
+PASS  Player can enter the lobby on foot
+PASS  Indoor shelter muffles the rain
+PASS  Archive door is accessible from the central corridor
+PASS  Player can walk into the archive
+PASS  Document 3 is reachable by the interaction ray
+PASS  Document 3 enters the inventory and opens for reading
+PASS  Document 3 pins to the detective board
+PASS  Document 4 is reachable by the interaction ray
+PASS  Document 4 enters the inventory and opens for reading
+PASS  Document 4 pins to the detective board
+PASS  Document 5 is reachable by the interaction ray
+PASS  Document 5 enters the inventory and opens for reading
+PASS  Document 5 pins to the detective board
+PASS  Weapon and recovered bullet have explicitly different calibers
+PASS  Body discovery record specifies when and the nearby pistol
+PASS  Tab opens the board inside the station
+PASS  All three archive documents appear on the board
+PASS  Return home preserves inventory and all board cards
+PASS  Personal note and card position survive travel
+PASS  House and archive evidence coexist in inventory
+PASS  Six-item inventory scrolls instead of overflowing
+PASS  All six documents remain accessible in inventory
+PASS  Travel from the house to station preserves evidence from both locations
+PASS  Evidence illustrations survive travel

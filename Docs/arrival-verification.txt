@@ -1,4 +1,4 @@
-PASS — 2026-11-20 11:42:38Z
+PASS — 2026-11-20 12:52:14Z
 PASS  Starts outside the house
 PASS  Start button restores movement
 PASS  Player loop is advancing
@@ -17,8 +17,7 @@ PASS  Car collider blocks walking through the body
 PASS  E opens destination menu and pauses movement
 PASS  Destination menu prevents player drift
 PASS  Current location is marked and cannot be selected
-PASS  Police station opens a placeholder without scene transition
-PASS  Placeholder clearly states location is unavailable
+PASS  Police station destination loads the real playable location
 PASS  Diner opens its placeholder without transition
 PASS  Leaving placeholder restores gameplay
 PASS  Left mouse click on car also opens destinations

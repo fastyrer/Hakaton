@@ -219,11 +219,14 @@ namespace Hakaton.Demo
         {
             destinationStub = false;
             var card = Panel(Screen.Travel, "ПАТРУЛЬНАЯ МАШИНА / МАРШРУТ", "Куда поедем?");
-            Button(card, (string.IsNullOrWhiteSpace(game.locationTitle) ? "ДОМ ВОЛКОВЫХ" : game.locationTitle.ToUpperInvariant()) + " · ВЫ ЗДЕСЬ", 42, 177, 916, () => { }).interactable = false;
-            Button(card, "ПОЛИЦЕЙСКИЙ УЧАСТОК", 42, 253, 916, () => game.SelectDestination("Полицейский участок"));
+            bool station = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "PoliceStation";
+            Button(card, station ? "ДОМ ВОЛКОВЫХ" : "ДОМ ВОЛКОВЫХ · ВЫ ЗДЕСЬ", 42, 177, 916,
+                () => game.SelectDestination("Дом Волковых")).interactable = station;
+            Button(card, station ? "ПОЛИЦЕЙСКИЙ УЧАСТОК · ВЫ ЗДЕСЬ" : "ПОЛИЦЕЙСКИЙ УЧАСТОК", 42, 253, 916,
+                () => game.SelectDestination("Полицейский участок")).interactable = !station;
             Button(card, "ПРИДОРОЖНОЕ КАФЕ", 42, 329, 916, () => game.SelectDestination("Придорожное кафе"));
-            Label(card, "Остальные пункты маршрута появятся позже.", 42, 422, 900, 36, 18, muted);
-            Button(card, "ОСТАТЬСЯ У ДОМА [ ESC ]", 42, 502, 550, Play);
+            Label(card, "Материалы дела и записи на доске останутся с вами.", 42, 422, 900, 36, 18, muted);
+            Button(card, "ОСТАТЬСЯ ЗДЕСЬ [ ESC ]", 42, 502, 550, Play);
         }
 
         public void ShowDestinationStub(string destination)

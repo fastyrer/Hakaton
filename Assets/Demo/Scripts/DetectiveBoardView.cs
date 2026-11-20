@@ -15,7 +15,7 @@ namespace Hakaton.Demo
         DemoGame game;
         DetectiveBoard board;
         Font font;
-        RectTransform window, inventory, inspector;
+        RectTransform window, inventory, inventoryList, inspector;
         Text status;
         Button undo;
         Texture2D cork;
@@ -38,7 +38,7 @@ namespace Hakaton.Demo
             window.sizeDelta = new Vector2(1280, 720);
             Fit();
             Label(window, "ДОСКА ДЕТЕКТИВА", 24, 17, 900, 38, 30, ink);
-            Label(window, "ДЕЛО 01 / СЕМЕЙНЫЙ ДОМ / ОКТЯБРЬ 2000", 26, 62, 980, 22, 13, dim);
+            Label(window, "ДЕЛО ВОЛКОВА / " + (string.IsNullOrWhiteSpace(game.locationTitle) ? "СЕМЕЙНЫЙ ДОМ" : game.locationTitle.ToUpperInvariant()), 26, 62, 980, 22, 13, dim);
             Btn(window, "Close board", "ЗАКРЫТЬ [ TAB ]", 1064, 22, 192, 42, () => game.hud.Play());
             inventory = Panel("Inventory", 24, 100, 228, 565);
             inspector = Panel("Card inspector", 988, 100, 268, 565);
@@ -179,14 +179,25 @@ namespace Hakaton.Demo
         {
             ClearChildren(inventory);
             Label(inventory, "ИНВЕНТАРЬ", 16, 16, 200, 30, 20, ink);
-            Label(inventory, "НАЙДЕНО: " + game.Found.Count + " / 3", 16, 49, 200, 22, 13, dim);
+            Label(inventory, "НАЙДЕНО: " + game.Found.Count + " / " + DemoGame.EvidenceTitles.Length, 16, 49, 200, 22, 13, dim);
+            var viewport = Rect(inventory, "Inventory viewport");
+            Place(viewport, 0, 80, 228, 435);
+            viewport.gameObject.AddComponent<Image>().color = new Color(0, 0, 0, 0.01f);
+            viewport.gameObject.AddComponent<RectMask2D>();
+            inventoryList = Rect(viewport, "Inventory content");
+            inventoryList.anchorMin = new Vector2(0, 1); inventoryList.anchorMax = new Vector2(1, 1);
+            inventoryList.pivot = new Vector2(0.5f, 1);
+            inventoryList.sizeDelta = new Vector2(0, Mathf.Max(435, game.Found.Count * 144));
+            var scroll = viewport.gameObject.AddComponent<ScrollRect>();
+            scroll.viewport = viewport; scroll.content = inventoryList; scroll.horizontal = false;
+            scroll.movementType = ScrollRect.MovementType.Clamped; scroll.scrollSensitivity = 32;
             int row = 0;
             for (int id = 0; id < DemoGame.EvidenceTitles.Length; id++)
             {
                 if (!board.Owns(id)) continue;
                 int source = id;
-                var item = Img(inventory, "Inventory item " + id, new Color(0.092f, 0.115f, 0.095f));
-                Place(item.rectTransform, 6, 83 + row * 144, 216, 136);
+                var item = Img(inventoryList, "Inventory item " + id, new Color(0.092f, 0.115f, 0.095f));
+                Place(item.rectTransform, 6, 3 + row * 144, 216, 136);
                 Label(item.transform, "ПРЕДМЕТ 0" + (id + 1), 10, 8, 198, 18, 11, dim);
                 var photo = Preview(item.transform, game.EvidenceIllustration(id), 10, 33, 42, 42);
                 Label(item.transform, DemoGame.EvidenceTitles[id], 61, 30, 145, 52, 16, ink);
@@ -196,7 +207,7 @@ namespace Hakaton.Demo
                 row++;
             }
             if (row == 0)
-                Label(inventory, "Улик пока нет.\n\nОсмотрите фотографию в гостиной и бумаги на столе кабинета.\n\nВзаимодействие — E.", 16, 91, 196, 300, 18, dim);
+                Label(inventory, "Улик пока нет.\n\nОсмотрите документы и предметы на столах. Найденные улики появятся здесь.\n\nВзаимодействие — E.", 16, 91, 196, 300, 18, dim);
             else Label(inventory, "Удаление карточек не расходует найденные предметы.", 16, 521, 196, 38, 12, dim);
         }
 

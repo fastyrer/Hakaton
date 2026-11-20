@@ -35,12 +35,16 @@ namespace Hakaton.Demo
         Vector3 threatOrigin;
 
         public static readonly string[] EvidenceTitles =
-        { "Семейная фотография", "Письмо без конверта", "Запись о встрече" };
+        { "Семейная фотография", "Письмо без конверта", "Запись о встрече",
+          "Протокол обнаружения тела", "Опись пистолета · .45 ACP", "Заключение эксперта · 9×19 мм" };
         public static readonly string[] EvidenceText =
         {
             "На обороте: «Наш первый дом. Нью-Джерси, 1989».\n\nОтец стоит на крыльце. Рядом — трое сыновей. На снимке дом кажется совсем новым.\n\nЯ помню этот день. Или только эту фотографию.",
             "Бумага сложена вчетверо. Подписи нет.\n\n«Я не уеду, пока не закончу с бумагами. Не говори мальчикам. Я объясню всё сам».\n\nДаты нет. Из письма нельзя понять, кому оно адресовано.",
-            "Оторванный лист настольного календаря. Октябрь 1997.\n\n«Четверг. 8:30 PM. Келлер. Боковая дверь. Папка — в кухне».\n\nЗапланированная встреча ещё не доказывает, что она состоялась. Стоит спросить Антона о посетителе."
+            "Оторванный лист настольного календаря. Октябрь 1997.\n\n«Четверг. 8:30 PM. Келлер. Боковая дверь. Папка — в кухне».\n\nЗапланированная встреча ещё не доказывает, что она состоялась. Стоит спросить Антона о посетителе.",
+            "ДЕЛО В-97/041 · КОПИЯ ПРОТОКОЛА\n\n16 октября 1997 года, 06:40. Тело моего отца, Волкова, обнаружено у служебного подъезда старой насосной станции.\n\nОгнестрельное ранение головы. Справа от тела, в 38 см от кисти, лежал пистолет. В материалах стоит предварительная версия: самоубийство.\n\nПриложения: опись оружия и заключение эксперта.",
+            "ДЕЛО В-97/041 · ВЕЩДОК № 12\n\nПистолет Colt M1911A1. Штатный калибр: .45 ACP (11,43×23 мм). Найден рядом с телом отца.\n\nОружие опечатано. Следов переоборудования ствола не установлено.\n\nВ описи нет подтверждения, что именно из этого пистолета произведён смертельный выстрел.",
+            "ДЕЛО В-97/041 · ЭКСПЕРТИЗА № 73\n\nПри вскрытии из головы отца извлечена пуля. Установленный калибр: 9×19 мм Parabellum.\n\nКалибр пули НЕ СОВПАДАЕТ с калибром найденного рядом Colt M1911A1 — .45 ACP.\n\nЭтот пистолет не мог выстрелить извлечённой пулей. Вывод о самоубийстве требует пересмотра; второе оружие не найдено."
         };
 
         void Start()
@@ -49,6 +53,7 @@ namespace Hakaton.Demo
             Phase = Stage.Explore;
             if (board == null) board = GetComponent<DetectiveBoard>() ?? gameObject.AddComponent<DetectiveBoard>();
             board.Initialize(this);
+            InvestigationTravel.Restore(this);
             if (threat != null)
             {
                 threatOrigin = threat.position;
@@ -136,6 +141,14 @@ namespace Hakaton.Demo
         public void SelectDestination(string destination)
         {
             SelectedDestination = destination;
+            string scene = destination == "Полицейский участок" ? "PoliceStation" : destination == "Дом Волковых" ? "HouseArrival" : null;
+            if (scene != null && SceneManager.GetActiveScene().name != scene && Application.CanStreamedLevelBeLoaded(scene))
+            {
+                InvestigationTravel.Capture(this);
+                Time.timeScale = 1;
+                SceneManager.LoadScene(scene);
+                return;
+            }
             hud.ShowDestinationStub(destination);
         }
 
@@ -147,7 +160,7 @@ namespace Hakaton.Demo
         }
 
         public Texture2D EvidenceIllustration(int id) => evidence != null && id >= 0 && id < evidence.Length && evidence[id] != null
-            ? evidence[id].illustration : null;
+            ? evidence[id].illustration : InvestigationTravel.Illustration(id);
 
         public void Talk()
         {
@@ -208,7 +221,7 @@ namespace Hakaton.Demo
             hud.ShowEnding();
         }
 
-        public void Restart() { Time.timeScale = 1; SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); }
+        public void Restart() { InvestigationTravel.Reset(); Time.timeScale = 1; SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); }
         void OnDestroy() { Cursor.lockState = CursorLockMode.None; Cursor.visible = true; Time.timeScale = 1; }
     }
 }
