@@ -1,0 +1,30 @@
+PASS — 2026-11-20 11:42:24Z
+PASS  Starts with introduction
+PASS  Intro button resumes game and player input
+PASS  Player loop advances
+PASS  WASD moves CharacterController
+PASS  Floor collider supports player
+PASS  Walls block player movement
+PASS  Interaction ray finds kitchen door
+PASS  E opens hinged door
+PASS  Open doorway is physically passable
+PASS  F toggles flashlight
+PASS  Tabletop clue is reachable by interaction ray
+PASS  E opens clue and records evidence
+PASS  Repeated inspection does not duplicate evidence
+PASS  Tab opens detective board
+PASS  Board closes and restores control
+PASS  Study clue 1 is physically reachable
+PASS  Study clue 2 is physically reachable
+PASS  All three evidence records are present
+PASS  Wrong evidence allows another attempt
+PASS  Correct evidence changes house state
+PASS  Changed hallway has red emergency lighting
+PASS  Fuse box starts active threat
+PASS  Pause freezes pursuer and chase timer
+PASS  Pursuer catches stationary player and shows defeat
+PASS  Checkpoint resets chase and preserves evidence
+PASS  Sprint outruns pursuer along corridor
+PASS  Kitchen door can be reached from safe side
+PASS  Closing kitchen door ends chase safely
+PASS  Playable loop reaches ending

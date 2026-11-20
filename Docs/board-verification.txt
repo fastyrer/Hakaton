@@ -1,0 +1,37 @@
+PASS — 2026-11-20 11:40:20Z
+PASS  Fresh game has case note and empty inventory
+PASS  All three world clues have inventory data and illustrations
+PASS  Tab opens detective board and pauses world
+PASS  Held Tab toggles only once
+PASS  Player cannot move while editing board
+PASS  Uncollected inventory items cannot create evidence or sourced notes
+PASS  Uncollected evidence is absent from inventory UI
+PASS  Empty note is rejected without leaving board
+PASS  Clue 0 is physically reachable
+PASS  World interaction puts first clue in inventory
+PASS  Inspection screen can pin owned evidence to board
+PASS  Duplicate evidence cards are blocked in UI and model
+PASS  Unity pointer drag updates stored card position
+PASS  Dragging outside surface clamps card to board
+PASS  Dragging uses board coordinates correctly at another UI scale
+PASS  Card placement survives closing and reopening Tab
+PASS  Board opens full readable inventory item
+PASS  Inspection returns to existing board state
+PASS  Clue 1 is physically reachable
+PASS  Clue 2 is physically reachable
+PASS  All clues can be collected and Tab opens board from inspection
+PASS  Every inventory item can be pinned independently
+PASS  Custom case note saves Cyrillic text and selected inventory source
+PASS  Existing note edits preserve identity and update source
+PASS  Visible source label follows note edits
+PASS  Deleting note removes only board record, not inventory
+PASS  Undo restores deleted text, source and position
+PASS  Removed evidence stays owned and becomes available to pin again
+PASS  Evidence can be re-added without duplicates
+PASS  Tab commits a valid unfinished draft before closing
+PASS  Repeated board reopening does not duplicate saved notes
+PASS  Cancel discards a new draft without modifying board
+PASS  Escape closes board and restores normal gameplay
+PASS  Movement works after repeated board, inspection and editor interactions
+PASS  A draft is retained when closing a board containing many records
+PASS  New cards remain on the surface as the record count grows

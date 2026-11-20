@@ -1,0 +1,48 @@
+{
+  "status": "completed",
+  "result": "Succeeded",
+  "platform": "StandaloneOSX",
+  "outputPath": "/Users/pavelvorotnikov/Hakaton/Builds/HouseDemo.app",
+  "totalSizeBytes": 94357929,
+  "buildTimeMs": 5339,
+  "totalWarnings": 345,
+  "totalErrors": 0,
+  "warningGroups": [
+    {
+      "count": 320,
+      "message": "Shader warning in 'ConvGeneric': \"TRANSPOSE_OUTPUT variants not supported with NON_UNIFORM_CONVGROUP_PER_OC, make sure this variant is not used\""
+    },
+    {
+      "count": 8,
+      "message": "Shader warning in 'Hidden/Sentis/ScatterND': signed/unsigned mismatch, unsigned assumed"
+    },
+    {
+      "count": 6,
+      "message": "Shader warning in 'Hidden/Sentis/ConvTranspose': integer modulus may be much slower, try using uints if possible."
+    },
+    {
+      "count": 3,
+      "message": "Shader warning in 'Hidden/Sentis/GridSample': signed/unsigned mismatch, unsigned assumed"
+    },
+    {
+      "count": 2,
+      "message": "Shader warning in 'Hidden/Sentis/ScatterElements': signed/unsigned mismatch, unsigned assumed"
+    },
+    {
+      "count": 2,
+      "message": "Shader warning in 'Hidden/Sentis/SliceSet': integer divides may be much slower, try using uints if possible."
+    },
+    {
+      "count": 2,
+      "message": "Shader warning in 'Hidden/Sentis/SliceSet': signed/unsigned mismatch, unsigned assumed"
+    },
+    {
+      "count": 1,
+      "message": "Shader warning in 'Hidden/Sentis/Pad': integer modulus may be much slower, try using uints if possible."
+    },
+    {
+      "count": 1,
+      "message": "Shader warning in 'Hidden/Sentis/ScatterND': 'j': loop control variable conflicts with a previous declaration in the outer scope; most recent declaration will be used"
+    }
+  ]
+}

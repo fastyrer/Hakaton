@@ -1,0 +1,16 @@
+{
+  "status": "completed",
+  "result": "Succeeded",
+  "platform": "StandaloneWindows64",
+  "outputPath": "/Users/pavelvorotnikov/Hakaton/Builds/Windows/HouseDemo.exe",
+  "totalSizeBytes": 134595314,
+  "buildTimeMs": 160006,
+  "totalWarnings": 517,
+  "totalErrors": 0,
+  "archive": "/Users/pavelvorotnikov/Hakaton/Builds/HouseDemo-Windows.zip",
+  "archiveBytes": 50857394,
+  "fileCount": 198,
+  "peArchitecture": "x86_64",
+  "zipIntegrity": "PASS",
+  "testedOnWindows": false
+}

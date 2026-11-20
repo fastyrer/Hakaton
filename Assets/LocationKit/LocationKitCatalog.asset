@@ -1,0 +1,337 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59c21a00c004e48e5ac75d84e7d751fb, type: 3}
+  m_Name: LocationKitCatalog
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::Hakaton.LocationKit.Editor.LocationKitCatalog
+  items:
+  - id: floor_wood
+    title: "\u041F\u043E\u043B \xB7 \u0434\u0435\u0440\u0435\u0432\u043E 4\xD74"
+    description: "\u0412\u0435\u0440\u0445 \u043F\u043E\u043B\u0430 \u0441\u043E\u0432\u043F\u0430\u0434\u0430\u0435\u0442 \u0441 \u0432\u044B\u0441\u043E\u0442\u043E\u0439 \u0441\u0435\u0442\u043A\u0438."
+    category: 0
+    prefab: {fileID: 2224453838829482267, guid: 911e7c43b4ce44861b794755429f8ea2, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: -0.1, z: 0}
+      m_Extent: {x: 2, y: 0.1, z: 2}
+  - id: floor_tile
+    title: "\u041F\u043E\u043B \xB7 \u043F\u043B\u0438\u0442\u043A\u0430 4\xD74"
+    description: "\u041F\u043B\u0438\u0442\u043A\u0430 \u0434\u043B\u044F \u043A\u0443\u0445\u043D\u0438 \u0438 \u043F\u043E\u0434\u0441\u043E\u0431\u043D\u044B\u0445 \u043F\u043E\u043C\u0435\u0449\u0435\u043D\u0438\u0439."
+    category: 0
+    prefab: {fileID: 7880698440670557522, guid: 7de5aa8e8ac7e4fe2b9d33c73f2ee3f7, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: -0.1, z: 0}
+      m_Extent: {x: 2, y: 0.1, z: 2}
+  - id: ceiling
+    title: "\u041F\u043E\u0442\u043E\u043B\u043E\u043A 4\xD74"
+    description: "\u0421\u0442\u0430\u0432\u0438\u0442\u0441\u044F \u043D\u0430 \u0443\u0440\u043E\u0432\u043D\u0435 \u043F\u043E\u043B\u0430; \u043F\u043E\u0442\u043E\u043B\u043E\u043A \u0431\u0443\u0434\u0435\u0442 \u043D\u0430 \u0432\u044B\u0441\u043E\u0442\u0435 3 \u043C."
+    category: 0
+    prefab: {fileID: 8550374777649587133, guid: 22b0857c306cf492ca9ecd440bfc42f0, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: 2.95, z: 0}
+      m_Extent: {x: 2, y: 0.049999952, z: 2}
+  - id: wall_paper
+    title: "\u0421\u0442\u0435\u043D\u0430 \xB7 \u043E\u0431\u043E\u0438 4 \u043C"
+    description: "\u0428\u0438\u0440\u0438\u043D\u0430 4 \u043C, \u0432\u044B\u0441\u043E\u0442\u0430 3 \u043C, \u0442\u043E\u043B\u0449\u0438\u043D\u0430 20 \u0441\u043C."
+    category: 0
+    prefab: {fileID: 967675904815411273, guid: 021e4a45e07c24ed6a151645f02d6897, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: 1.5, z: 0}
+      m_Extent: {x: 2, y: 1.5, z: 0.12}
+  - id: wall_siding
+    title: "\u0421\u0442\u0435\u043D\u0430 \xB7 \u0444\u0430\u0441\u0430\u0434 4 \u043C"
+    description: "\u041D\u0430\u0440\u0443\u0436\u043D\u0430\u044F \u043E\u0431\u0448\u0438\u0432\u043A\u0430 \u0441 \u0442\u0435\u043C\u0438 \u0436\u0435 \u0440\u0430\u0437\u043C\u0435\u0440\u0430\u043C\u0438."
+    category: 0
+    prefab: {fileID: 758487533817655952, guid: 839432c623e5446b39c7d2676a3d93ca, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: 1.5, z: 0}
+      m_Extent: {x: 2, y: 1.5, z: 0.12}
+  - id: doorway
+    title: "\u0421\u0442\u0435\u043D\u0430 \u0441 \u0434\u0432\u0435\u0440\u044C\u044E"
+    description: "\u041F\u0440\u043E\u0451\u043C \u0438 \u0440\u0430\u0431\u043E\u0442\u0430\u044E\u0449\u0430\u044F \u0434\u0432\u0435\u0440\u044C: \u043E\u0442\u043A\u0440\u044B\u0442\u044C \u0438 \u0437\u0430\u043A\u0440\u044B\u0442\u044C \u0447\u0435\u0440\u0435\u0437 E."
+    category: 0
+    prefab: {fileID: 6738935580721392469, guid: 6c874240f06fb4b42952188a65ef8b13, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: 1.5, z: 0}
+      m_Extent: {x: 2, y: 1.5, z: 0.17}
+  - id: window_wall
+    title: "\u0421\u0442\u0435\u043D\u0430 \u0441 \u043E\u043A\u043D\u043E\u043C"
+    description: "\u041D\u0430\u0441\u0442\u043E\u044F\u0449\u0438\u0439 \u043F\u0440\u043E\u0451\u043C, \u0441\u0442\u0435\u043A\u043B\u043E, \u0440\u0430\u043C\u0430 \u0438 \u043F\u043E\u0434\u043E\u043A\u043E\u043D\u043D\u0438\u043A."
+    category: 0
+    prefab: {fileID: 8304365195791763021, guid: 09e73e31ba3bd4aba960109bb2d51ea9, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: 1.5, z: 0}
+      m_Extent: {x: 2, y: 1.5, z: 0.23}
+  - id: roof
+    title: "\u0414\u0432\u0443\u0441\u043A\u0430\u0442\u043D\u0430\u044F \u043A\u0440\u044B\u0448\u0430"
+    description: "\u041C\u043E\u0434\u0443\u043B\u044C 4\xD74; \u0437\u0430\u043A\u0440\u044B\u0432\u0430\u0435\u0442 \u043A\u043E\u043C\u043D\u0430\u0442\u0443 \u043E\u0442 \u0434\u043E\u0436\u0434\u044F. \u041C\u043E\u0436\u043D\u043E \u0440\u0430\u0441\u0442\u044F\u0433\u0438\u0432\u0430\u0442\u044C \u043F\u043E X/Z."
+    category: 0
+    prefab: {fileID: 6964881186377435552, guid: fa1a96007645b4f59a8f0ee9a6538e62, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: 3.7749999, z: 0}
+      m_Extent: {x: 2.2, y: 0.67499995, z: 2.2}
+  - id: table
+    title: "\u0421\u0442\u043E\u043B"
+    description: "\u0421\u0442\u043E\u043B \u0432\u044B\u0441\u043E\u0442\u043E\u0439 88 \u0441\u043C. \u0423\u043B\u0438\u043A\u0438 \u043C\u043E\u0436\u043D\u043E \u043F\u043E\u043B\u043E\u0436\u0438\u0442\u044C \u043D\u0430 \u0441\u0442\u043E\u043B\u0435\u0448\u043D\u0438\u0446\u0443."
+    category: 1
+    prefab: {fileID: 356374752641220873, guid: e427b44949eb7442d91a7067a701a75a, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: 0.44, z: 0}
+      m_Extent: {x: 0.9, y: 0.44, z: 0.45}
+  - id: chair
+    title: "\u0421\u0442\u0443\u043B"
+    description: "\u041F\u0440\u043E\u0441\u0442\u043E\u0439 \u0434\u0435\u0440\u0435\u0432\u044F\u043D\u043D\u044B\u0439 \u0441\u0442\u0443\u043B."
+    category: 1
+    prefab: {fileID: 2255655308566496999, guid: d898d41e9502b4705891f7c694031237, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: 0.69, z: 0.0024999976}
+      m_Extent: {x: 0.325, y: 0.69, z: 0.3275}
+  - id: sofa
+    title: "\u0414\u0438\u0432\u0430\u043D"
+    description: "\u041D\u0438\u0437\u043A\u043E\u043F\u043E\u043B\u0438\u0433\u043E\u043D\u0430\u043B\u044C\u043D\u044B\u0439 \u0434\u0438\u0432\u0430\u043D \u0441 \u043E\u0442\u0434\u0435\u043B\u044C\u043D\u044B\u043C\u0438 \u043F\u043E\u0434\u0443\u0448\u043A\u0430\u043C\u0438."
+    category: 1
+    prefab: {fileID: 5668832578490386281, guid: 6eb027db19caa4bd0a75907b0e40e10f, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: 0.805, z: 0.012499988}
+      m_Extent: {x: 1.525, y: 0.695, z: 0.6125}
+  - id: bookcase
+    title: "\u041A\u043D\u0438\u0436\u043D\u044B\u0439 \u0448\u043A\u0430\u0444"
+    description: "\u0413\u043E\u0442\u043E\u0432\u044B\u0439 \u0448\u043A\u0430\u0444 \u0441 \u043A\u043D\u0438\u0433\u0430\u043C\u0438."
+    category: 1
+    prefab: {fileID: 823209408455605809, guid: 9717e33e28b0f44828fae4d66a640995, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: 1.145, z: 0}
+      m_Extent: {x: 0.90000004, y: 1.145, z: 0.215}
+  - id: cabinet
+    title: "\u041A\u0430\u0440\u0442\u043E\u0442\u0435\u0447\u043D\u044B\u0439 \u0448\u043A\u0430\u0444"
+    description: "\u041C\u0435\u0442\u0430\u043B\u043B\u0438\u0447\u0435\u0441\u043A\u0438\u0439 \u0448\u043A\u0430\u0444 \u0441 \u044F\u0449\u0438\u043A\u0430\u043C\u0438."
+    category: 1
+    prefab: {fileID: 1147228174524506587, guid: abb6fad909b384790a364f6b284aeedb, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: 0.68, z: -0.044999987}
+      m_Extent: {x: 0.55, y: 0.68, z: 0.44500002}
+  - id: crate
+    title: "\u041A\u043E\u0440\u043E\u0431\u043A\u0430"
+    description: "\u041A\u0430\u0440\u0442\u043E\u043D\u043D\u0430\u044F \u043A\u043E\u0440\u043E\u0431\u043A\u0430; \u043F\u043E\u0434\u0445\u043E\u0434\u0438\u0442 \u0434\u043B\u044F \u0441\u0442\u043E\u043F\u043E\u043A."
+    category: 1
+    prefab: {fileID: 1767767086333777626, guid: 01bb62c17711244748f3dfdb31d04744, type: 3}
+    preferSurface: 1
+    bounds:
+      m_Center: {x: 0, y: 0.3, z: 0}
+      m_Extent: {x: 0.5, y: 0.3, z: 0.4}
+  - id: crt
+    title: "CRT-\u0442\u0435\u043B\u0435\u0432\u0438\u0437\u043E\u0440"
+    description: "\u0422\u0435\u043B\u0435\u0432\u0438\u0437\u043E\u0440 \u0440\u0443\u0431\u0435\u0436\u0430 2000 \u0433\u043E\u0434\u0430."
+    category: 1
+    prefab: {fileID: 3931711205241794215, guid: 42d72dbc73362446197f0be3d4cc4af2, type: 3}
+    preferSurface: 1
+    bounds:
+      m_Center: {x: 0, y: 0.4, z: -0.026250005}
+      m_Extent: {x: 0.6, y: 0.4, z: 0.40125}
+  - id: phone
+    title: "\u041F\u0440\u043E\u0432\u043E\u0434\u043D\u043E\u0439 \u0442\u0435\u043B\u0435\u0444\u043E\u043D"
+    description: "\u041D\u0435\u0431\u043E\u043B\u044C\u0448\u043E\u0439 \u043F\u0440\u0435\u0434\u043C\u0435\u0442 \u0434\u043B\u044F \u0441\u0442\u043E\u043B\u043E\u0432 \u0438 \u0442\u0443\u043C\u0431."
+    category: 1
+    prefab: {fileID: 2199528520106078071, guid: 90a00d7c756a54e5db9dc30f37d29708, type: 3}
+    preferSurface: 1
+    bounds:
+      m_Center: {x: 0, y: 0.125, z: 0}
+      m_Extent: {x: 0.29, y: 0.125, z: 0.2}
+  - id: fridge
+    title: "\u0425\u043E\u043B\u043E\u0434\u0438\u043B\u044C\u043D\u0438\u043A"
+    description: "\u0425\u043E\u043B\u043E\u0434\u0438\u043B\u044C\u043D\u0438\u043A \u0441 \u0440\u0443\u0447\u043A\u043E\u0439 \u0438 \u043E\u0442\u0434\u0435\u043B\u044C\u043D\u043E\u0439 \u0434\u0432\u0435\u0440\u0446\u0435\u0439 \u043C\u043E\u0440\u043E\u0437\u0438\u043B\u044C\u043D\u0438\u043A\u0430."
+    category: 1
+    prefab: {fileID: 6958669511448626553, guid: 5620888878c8c4a3eaa98bf633be97bd, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: 1.02, z: -0.045000017}
+      m_Extent: {x: 0.65, y: 1.02, z: 0.645}
+  - id: rug
+    title: "\u041A\u043E\u0432\u0451\u0440"
+    description: "\u041F\u043B\u043E\u0441\u043A\u0438\u0439 \u043A\u043E\u0432\u0451\u0440 3\xD72 \u043C \u0431\u0435\u0437 \u0434\u043E\u043F\u043E\u043B\u043D\u0438\u0442\u0435\u043B\u044C\u043D\u043E\u0433\u043E \u043A\u043E\u043B\u043B\u0430\u0439\u0434\u0435\u0440\u0430."
+    category: 1
+    prefab: {fileID: 8313646176091446149, guid: cebb41daabe5948f5ad530ad3664c56f, type: 3}
+    preferSurface: 1
+    bounds:
+      m_Center: {x: 0, y: 0.008, z: 0}
+      m_Extent: {x: 1.5, y: 0.008, z: 1}
+  - id: ground_grass
+    title: "\u0413\u0430\u0437\u043E\u043D 4\xD74"
+    description: "\u0423\u0447\u0430\u0441\u0442\u043E\u043A \u0437\u0435\u043C\u043B\u0438 \u0441 \u043A\u043E\u043B\u043B\u0430\u0439\u0434\u0435\u0440\u043E\u043C."
+    category: 2
+    prefab: {fileID: 5344733837917071551, guid: a8152a0935a934f1e9c2df9c14648181, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: -0.15, z: 0}
+      m_Extent: {x: 2, y: 0.15, z: 2}
+  - id: ground_drive
+    title: "\u0410\u0441\u0444\u0430\u043B\u044C\u0442 4\xD74"
+    description: "\u041C\u043E\u0434\u0443\u043B\u044C \u043F\u043E\u0434\u044A\u0435\u0437\u0434\u043D\u043E\u0439 \u0434\u043E\u0440\u043E\u0436\u043A\u0438 \u0438\u043B\u0438 \u0443\u043B\u0438\u0446\u044B."
+    category: 2
+    prefab: {fileID: 5406859238590015396, guid: fada26dc41071470f968d9c6a3834f33, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: -0.1, z: 0}
+      m_Extent: {x: 2, y: 0.1, z: 2}
+  - id: path
+    title: "\u0414\u043E\u0440\u043E\u0436\u043A\u0430 2\xD74"
+    description: "\u0411\u0435\u0442\u043E\u043D\u043D\u0430\u044F \u043F\u0435\u0448\u0435\u0445\u043E\u0434\u043D\u0430\u044F \u0434\u043E\u0440\u043E\u0436\u043A\u0430."
+    category: 2
+    prefab: {fileID: 3706089280418063717, guid: 0f33acded2ae74942a2be4872b4c3e0d, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: -0.06, z: 0}
+      m_Extent: {x: 1, y: 0.06, z: 2}
+  - id: fence
+    title: "\u0417\u0430\u0431\u043E\u0440 4 \u043C"
+    description: "\u0421\u0435\u043A\u0446\u0438\u044F \u043E\u0433\u0440\u0430\u0434\u044B \u0441 \u043A\u043E\u043B\u043B\u0430\u0439\u0434\u0435\u0440\u043E\u043C."
+    category: 2
+    prefab: {fileID: 731755603247787367, guid: 3f0a712f9c18346a1b866aca624f129f, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: 0.65, z: 0.024999999}
+      m_Extent: {x: 2.075, y: 0.65, z: 0.065}
+  - id: tree
+    title: "\u0414\u0435\u0440\u0435\u0432\u043E"
+    description: "\u041D\u0438\u0437\u043A\u043E\u043F\u043E\u043B\u0438\u0433\u043E\u043D\u0430\u043B\u044C\u043D\u0430\u044F \u0435\u043B\u044C."
+    category: 2
+    prefab: {fileID: 3505307890730114926, guid: 83de0509404ee448c81236c8437a9cfc, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: 3.6, z: 0}
+      m_Extent: {x: 2.5, y: 3.6, z: 2.5}
+  - id: car
+    title: "\u041F\u043E\u043B\u0438\u0446\u0435\u0439\u0441\u043A\u0430\u044F \u043C\u0430\u0448\u0438\u043D\u0430"
+    description: "\u041C\u0435\u043D\u044E \u043B\u043E\u043A\u0430\u0446\u0438\u0439 \u0443\u0436\u0435 \u043F\u043E\u0434\u043A\u043B\u044E\u0447\u0435\u043D\u043E: E \u0438\u043B\u0438 \u041B\u041A\u041C \u043F\u043E \u043A\u0443\u0437\u043E\u0432\u0443."
+    category: 2
+    prefab: {fileID: 6770929957551218317, guid: 9918294ca723b4e3d8df6610c8057f32, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: 1.0899999, z: -0.022500038}
+      m_Extent: {x: 1.2756001, y: 1.0699999, z: 2.7075}
+  - id: warm_light
+    title: "\u0422\u0451\u043F\u043B\u0430\u044F \u043B\u0430\u043C\u043F\u0430"
+    description: "\u041B\u0430\u043C\u043F\u0430 \u043D\u0430 \u0432\u044B\u0441\u043E\u0442\u0435 2,6 \u043C \u043E\u0442 \u0443\u0440\u043E\u0432\u043D\u044F \u043F\u043E\u043B\u0430."
+    category: 3
+    prefab: {fileID: 5183238931104210089, guid: 174c1cf965bac40d38d0469834fd047a, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: 2.75, z: 0}
+      m_Extent: {x: 0.21, y: 0.049999952, z: 0.21}
+  - id: cold_light
+    title: "\u0425\u043E\u043B\u043E\u0434\u043D\u0430\u044F \u043B\u0430\u043C\u043F\u0430"
+    description: "\u0425\u043E\u043B\u043E\u0434\u043D\u044B\u0439 \u0441\u0432\u0435\u0442 \u0434\u043B\u044F \u043A\u043E\u0440\u0438\u0434\u043E\u0440\u043E\u0432 \u0438 \u0443\u043B\u0438\u0446\u044B."
+    category: 3
+    prefab: {fileID: 5162006697586353788, guid: 467d361fb6be44ed8882bcddbba76f14, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: 2.75, z: 0}
+      m_Extent: {x: 0.21, y: 0.049999952, z: 0.21}
+  - id: floor_lamp
+    title: "\u0422\u043E\u0440\u0448\u0435\u0440"
+    description: "\u0422\u0451\u043F\u043B\u044B\u0439 \u0442\u043E\u0440\u0448\u0435\u0440 \u0441 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u043E\u043C \u0441\u0432\u0435\u0442\u0430."
+    category: 3
+    prefab: {fileID: 937672327877778275, guid: 44742c4cf00b84a1781afbca06cb4c27, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: 0.875, z: 0}
+      m_Extent: {x: 0.24, y: 0.875, z: 0.24}
+  - id: desk_lamp
+    title: "\u041D\u0430\u0441\u0442\u043E\u043B\u044C\u043D\u0430\u044F \u043B\u0430\u043C\u043F\u0430"
+    description: "\u041B\u0430\u043C\u043F\u0430 \u0434\u043B\u044F \u0440\u0430\u0437\u043C\u0435\u0449\u0435\u043D\u0438\u044F \u043D\u0430 \u0441\u0442\u043E\u043B\u0435."
+    category: 3
+    prefab: {fileID: 6137368674489313714, guid: 8873d6aae7e9a4dbb8f38f2c3267527c, type: 3}
+    preferSurface: 1
+    bounds:
+      m_Center: {x: 0, y: 0.325, z: 0}
+      m_Extent: {x: 0.24, y: 0.325, z: 0.24}
+  - id: clue_0
+    title: "\u0423\u043B\u0438\u043A\u0430 \xB7 \u0421\u0435\u043C\u0435\u0439\u043D\u0430\u044F \u0444\u043E\u0442\u043E\u0433\u0440\u0430\u0444\u0438\u044F"
+    description: "\u0413\u043E\u0442\u043E\u0432\u0430\u044F \u0443\u043B\u0438\u043A\u0430 \u0434\u043B\u044F \u0438\u043D\u0432\u0435\u043D\u0442\u0430\u0440\u044F \u0438 \u0434\u043E\u0441\u043A\u0438. \u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u0435 \u043D\u0430 \u0441\u0442\u043E\u043B\u0435 \u0441 \u0440\u0435\u0436\u0438\u043C\u043E\u043C \xAB\u041F\u043E \u043F\u043E\u0432\u0435\u0440\u0445\u043D\u043E\u0441\u0442\u0438\xBB."
+    category: 4
+    prefab: {fileID: 7977196847934379566, guid: d8036dacc151d4435920828b315bc653, type: 3}
+    preferSurface: 1
+    bounds:
+      m_Center: {x: 0, y: 0.0131250005, z: 0}
+      m_Extent: {x: 0.26, y: 0.0131250005, z: 0.2}
+  - id: clue_1
+    title: "\u0423\u043B\u0438\u043A\u0430 \xB7 \u041F\u0438\u0441\u044C\u043C\u043E \u0431\u0435\u0437 \u043A\u043E\u043D\u0432\u0435\u0440\u0442\u0430"
+    description: "\u0413\u043E\u0442\u043E\u0432\u0430\u044F \u0443\u043B\u0438\u043A\u0430 \u0434\u043B\u044F \u0438\u043D\u0432\u0435\u043D\u0442\u0430\u0440\u044F \u0438 \u0434\u043E\u0441\u043A\u0438. \u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u0435 \u043D\u0430 \u0441\u0442\u043E\u043B\u0435 \u0441 \u0440\u0435\u0436\u0438\u043C\u043E\u043C \xAB\u041F\u043E \u043F\u043E\u0432\u0435\u0440\u0445\u043D\u043E\u0441\u0442\u0438\xBB."
+    category: 4
+    prefab: {fileID: 6890366652004931746, guid: 38716c8bf1cbe44b4bd2334781ac2dea, type: 3}
+    preferSurface: 1
+    bounds:
+      m_Center: {x: 0, y: 0.0131250005, z: 0}
+      m_Extent: {x: 0.26, y: 0.0131250005, z: 0.2}
+  - id: clue_2
+    title: "\u0423\u043B\u0438\u043A\u0430 \xB7 \u0417\u0430\u043F\u0438\u0441\u044C \u043E \u0432\u0441\u0442\u0440\u0435\u0447\u0435"
+    description: "\u0413\u043E\u0442\u043E\u0432\u0430\u044F \u0443\u043B\u0438\u043A\u0430 \u0434\u043B\u044F \u0438\u043D\u0432\u0435\u043D\u0442\u0430\u0440\u044F \u0438 \u0434\u043E\u0441\u043A\u0438. \u0420\u0430\u0437\u043C\u0435\u0441\u0442\u0438\u0442\u0435 \u043D\u0430 \u0441\u0442\u043E\u043B\u0435 \u0441 \u0440\u0435\u0436\u0438\u043C\u043E\u043C \xAB\u041F\u043E \u043F\u043E\u0432\u0435\u0440\u0445\u043D\u043E\u0441\u0442\u0438\xBB."
+    category: 4
+    prefab: {fileID: 3805732914608828921, guid: 928de420554eb4f6da3de649144672cd, type: 3}
+    preferSurface: 1
+    bounds:
+      m_Center: {x: 0, y: 0.0131250005, z: 0}
+      m_Extent: {x: 0.26, y: 0.0131250005, z: 0.2}
+  - id: spawn
+    title: "\u0422\u043E\u0447\u043A\u0430 \u0441\u0442\u0430\u0440\u0442\u0430"
+    description: "\u0417\u0430\u0434\u0430\u0451\u0442 \u043C\u0435\u0441\u0442\u043E \u043F\u043E\u044F\u0432\u043B\u0435\u043D\u0438\u044F \u0438 \u043D\u0430\u043F\u0440\u0430\u0432\u043B\u0435\u043D\u0438\u0435 \u0432\u0437\u0433\u043B\u044F\u0434\u0430. \u041F\u043E\u0432\u0442\u043E\u0440\u043D\u0430\u044F \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0430 \u043F\u0435\u0440\u0435\u043C\u0435\u0449\u0430\u0435\u0442 \u0441\u0443\u0449\u0435\u0441\u0442\u0432\u0443\u044E\u0449\u0438\u0439 \u0441\u0442\u0430\u0440\u0442."
+    category: 4
+    prefab: {fileID: 2526319364049267495, guid: 7ad03fccc69794b91ac359893360e7bc, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: 0.9, z: 0}
+      m_Extent: {x: 0.35, y: 0.9, z: 0.35}
+  - id: shelter
+    title: "\u0417\u043E\u043D\u0430 \u043F\u043E\u043C\u0435\u0449\u0435\u043D\u0438\u044F 4\xD74"
+    description: "\u041F\u0440\u0438\u0433\u043B\u0443\u0448\u0430\u0435\u0442 \u0434\u043E\u0436\u0434\u044C \u0432\u043D\u0443\u0442\u0440\u0438. \u0420\u0430\u0441\u0442\u044F\u043D\u0438\u0442\u0435 \u043E\u0431\u044A\u0451\u043C \u043F\u043E\u0434 \u0440\u0430\u0437\u043C\u0435\u0440 \u043A\u043E\u043C\u043D\u0430\u0442\u044B; \u0441\u0430\u043C \u0434\u043E\u0436\u0434\u044C \u043E\u0441\u0442\u0430\u043D\u0430\u0432\u043B\u0438\u0432\u0430\u044E\u0442 \u043A\u0440\u044B\u0448\u0430 \u0438 \u043F\u043E\u0442\u043E\u043B\u043E\u043A."
+    category: 4
+    prefab: {fileID: 3198059890046113359, guid: aac614f68fce44f08a431a91a3eccaee, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: 1.5, z: 0}
+      m_Extent: {x: 2, y: 1.5, z: 2}
+  - id: rain
+    title: "\u0414\u043E\u0436\u0434\u044C"
+    description: "\u041E\u0434\u043D\u0430 \u0441\u0438\u0441\u0442\u0435\u043C\u0430 \u043F\u043E\u0433\u043E\u0434\u044B \u043D\u0430 \u043B\u043E\u043A\u0430\u0446\u0438\u044E; \u043F\u043B\u043E\u0449\u0430\u0434\u044C \u0438 \u0438\u043D\u0442\u0435\u043D\u0441\u0438\u0432\u043D\u043E\u0441\u0442\u044C \u043D\u0430 \u0432\u043A\u043B\u0430\u0434\u043A\u0435 \xAB\u041B\u043E\u043A\u0430\u0446\u0438\u044F\xBB."
+    category: 4
+    prefab: {fileID: 1272526084686701722, guid: f77d140edd49c4090850282d32d458a0, type: 3}
+    preferSurface: 0
+    bounds:
+      m_Center: {x: 0, y: 1.5, z: 0}
+      m_Extent: {x: 2, y: 1.5, z: 2}
+  finishes:
+  - title: "\u041E\u0431\u043E\u0438"
+    material: {fileID: 2100000, guid: eb12fca61feb8447f8c8d97784e2877c, type: 2}
+  - title: "\u0428\u0442\u0443\u043A\u0430\u0442\u0443\u0440\u043A\u0430"
+    material: {fileID: 2100000, guid: 511672166852543c485848bbe69e7e7f, type: 2}
+  - title: "\u0414\u0435\u0440\u0435\u0432\u043E"
+    material: {fileID: 2100000, guid: 33c45b4e5fa9f4ab6818a4ee4da977a6, type: 2}
+  - title: "\u041F\u043B\u0438\u0442\u043A\u0430"
+    material: {fileID: 2100000, guid: 39e37a353d2dd46b7a5a77ee2a2c7d8b, type: 2}
+  - title: "\u0424\u0430\u0441\u0430\u0434"
+    material: {fileID: 2100000, guid: b2046fd7f98224f56b8463ace9e4a894, type: 2}
+  - title: "\u0411\u0435\u0442\u043E\u043D"
+    material: {fileID: 2100000, guid: faa116e668ca642f6b718b7fd04c42f0, type: 2}
+  - title: "\u0410\u0441\u0444\u0430\u043B\u044C\u0442"
+    material: {fileID: 2100000, guid: 45096e48103164993997cacc33fb1365, type: 2}
+  playerRig: {fileID: 1478570663687825503, guid: 482325c7a3c694f06b5a4a966adedccb, type: 3}
