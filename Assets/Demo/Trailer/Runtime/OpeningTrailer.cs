@@ -18,6 +18,8 @@ namespace Hakaton.Demo.Trailer
         public AudioSource music;
         public TrailerActor[] actors;
         public ParticleSystem[] particles;
+        public ParticleSystem[] smokeParticles=System.Array.Empty<ParticleSystem>();
+        public TrailerStationAmbience stationAmbience;
         public bool externalClock, playOnStart=true;
         [Range(0,1)] public float musicVolume=.65f;
         [Min(0)] public float musicFadeIn, musicFadeOut;
@@ -97,9 +99,10 @@ namespace Hakaton.Demo.Trailer
             worldCamera.transform.rotation=Quaternion.LookRotation(look-worldCamera.transform.position);
             worldCamera.fieldOfView=shot.fieldOfView;
             foreach(var actor in actors)if(actor!=null&&actor.gameObject.activeInHierarchy)actor.Sample(CurrentTime);
+            if(stationAmbience!=null)stationAmbience.Sample(CurrentTime);
             foreach(var particle in particles)if(particle!=null&&particle.gameObject.activeInHierarchy)
             {
-                bool smoke=particle.name.Contains("ДЫМ");
+                bool smoke=IsSmoke(particle);
                 var renderer=particle.GetComponent<ParticleSystemRenderer>();renderer.enabled=smoke||shot.exterior;
                 if(renderer.enabled)particle.Simulate(6+CurrentTime%8,true,true,false);
             }
@@ -127,6 +130,7 @@ namespace Hakaton.Demo.Trailer
             RenderPipeline.SubmitRenderRequest(outputCamera,new UniversalRenderPipeline.SingleCameraRequest{destination=Output});
             controls.gameObject.SetActive(true);outputCamera.targetTexture=previous;scaler.enabled=wasEnabled;return Output;
         }
+        public bool IsSmoke(ParticleSystem effect)=>effect!=null&&(effect.name.Contains("ДЫМ")||(smokeParticles!=null&&System.Array.IndexOf(smokeParticles,effect)>=0));
         static void SetAlpha(Graphic g,float alpha){var c=g.color;c.a=alpha;g.color=c;}
         void OnDestroy()
         {

@@ -1,5 +1,5 @@
 {
-  "file": "/Users/pavelvorotnikov/Hakaton/Builds/Trailers/OpeningTrailer-FranksChoice-Full.mp4",
+  "file": "/Users/pavelvorotnikov/Hakaton/Builds/Trailers/OpeningTrailer-UpdatedStation-FranksChoice.mp4",
   "music": "/Users/pavelvorotnikov/Hakaton/Assets/Demo/Audio/Tyler Bates - Frank s Choice.mp3",
   "source_audio_seconds": 216.921875,
   "export_audio_seconds": 216.921875,
@@ -10,7 +10,9 @@
   "fps": 24,
   "resolution": "1280x720",
   "full_music_correlation": 0.9997623979660585,
-  "bytes": 117997110,
+  "bytes": 142395376,
   "decode_errors": "",
-  "unity_checks": 109
+  "unity_checks": 109,
+  "station_refresh_checks": 27,
+  "preserved_shots": 30
 }

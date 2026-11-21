@@ -27,12 +27,12 @@ public static class VerifyTrailer
         foreach(string name in new[]{"АЛЕКСЕЙ","ИВАН","ДМИТРИЙ","ПАВЕЛ","ФЁДОР","ДЕТЕКТИВ"})
             Check(d.shots.Any(s=>s.name==name),"Scenario character is introduced: "+name);
         d.RenderAt(d.shots[4].start+3);
-        var smoke=d.particles.Single(p=>p.name.Contains("ДЫМ"));
+        var smoke=d.particles.Single(p=>p.name=="ДЫМ · сигарета");
         Check(smoke.particleCount>5&&smoke.GetComponent<ParticleSystemRenderer>().enabled,"Cigarette smoke has visible rendered particles");
-        Check(d.particles.Where(p=>!p.name.Contains("ДЫМ")).All(p=>!p.GetComponent<ParticleSystemRenderer>().enabled),"Rain is hidden during interior shots");
+        Check(d.particles.Where(p=>!d.IsSmoke(p)).All(p=>!p.GetComponent<ParticleSystemRenderer>().enabled),"Rain is hidden during interior shots");
         Check(d.musicFadeIn==0&&d.musicFadeOut==0,"Original track intro and outro are preserved without added audio fades");
         d.RenderAt(d.shots[1].start+2);
-        Check(d.particles.Where(p=>!p.name.Contains("ДЫМ")).All(p=>p.GetComponent<ParticleSystemRenderer>().enabled),"Both exterior flights show rain");
+        Check(d.particles.Where(p=>!d.IsSmoke(p)).All(p=>p.GetComponent<ParticleSystemRenderer>().enabled),"Both exterior flights show rain");
         var escort=d.actors.Single(a=>a.name=="Конвоир");var prisoner=d.actors.Single(a=>a.name.Contains("Бездомный"));
         d.RenderAt(d.shots[6].start+.1f);var p0=prisoner.transform.position;
         d.RenderAt(d.shots[7].start+d.shots[7].duration-.1f);
@@ -47,8 +47,8 @@ public static class VerifyTrailer
         Check(d.Paused&&Mathf.Abs(d.CurrentTime-frozen)<.02f&&!d.music.isPlaying,"Pause freezes both camera and music");
         d.TogglePause();await Delay(.3);
         Check(!d.Paused&&d.CurrentTime>frozen+.1f&&d.music.isPlaying,"Resume restarts both camera and music");
-        d.ContinueToGame();await Until(()=>SceneManager.GetActiveScene().name=="HouseArrival",10);
-        Check(SceneManager.GetActiveScene().name=="HouseArrival","Skipping the opening enters the playable game");
+        d.ContinueToGame();await Until(()=>SceneManager.GetActiveScene().name==Hakaton.Demo.DemoGame.HomeScene,10);
+        Check(SceneManager.GetActiveScene().name==Hakaton.Demo.DemoGame.HomeScene,"Skipping the opening enters the playable game");
         File.WriteAllText("Docs/Trailer/verification.txt","PASS\n"+string.Join("\n",passed));return passed.ToArray();
     }
     static void Check(bool ok,string message){if(!ok)throw new Exception(message);passed.Add("PASS  "+message);}

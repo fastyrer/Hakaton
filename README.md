@@ -83,4 +83,4 @@ Tab и Esc закрывают доску и возвращают управле�
 
 ## Вступительный трейлер
 
-`Assets/Scenes/OpeningTrailer.unity` — Полная длина Tyler Bates — Frank’s Choice (около 3:37), 30 планов, постановочные сцены участка и представление героев по сценарию. Открыть через **Hakaton → Трейлер → Открыть вступление**, затем Play. Пробел — пауза, R — сначала, Esc — к игре. [Монтаж и экспорт](Docs/OPENING_TRAILER.md).
+`Assets/Scenes/OpeningTrailer.unity` — Полная длина Tyler Bates — Frank’s Choice (около 3:37), 30 планов, нынешний обжитой полицейский участок и представление героев по сценарию. Концепция кадров и монтаж сохранены. Открыть через **Hakaton → Трейлер → Открыть вступление**, затем Play. Пробел — пауза, R — сначала, Esc — к игре. [Монтаж и экспорт](Docs/OPENING_TRAILER.md). Текущий MP4: `Builds/Trailers/OpeningTrailer-UpdatedStation-FranksChoice.mp4`.

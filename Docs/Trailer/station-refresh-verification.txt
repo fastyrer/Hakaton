@@ -1,0 +1,27 @@
+PASS  All thirty cuts, camera flights, framing, captions and shot concepts are unchanged
+PASS  Full soundtrack duration and music treatment are unchanged
+PASS  All fifteen original staged actors and recorders remain
+PASS  Trailer uses a fresh copy of the current police station
+PASS  Current station's twenty-four windows and blinds are present
+PASS  Current station's two copiers are present
+PASS  All fourteen detailed workstations are present
+PASS  Thirty-two original background NPCs retain their place in the scene
+PASS  Gameplay, headphones and player listener stay inactive in the trailer
+PASS  Eight fans and six clock hands follow the cinematic clock
+PASS  Rain, the original cigarette and two current desk ashtrays are explicitly classified
+PASS  Detective still sits with both feet on the desk
+PASS  Surveillance composition retains the same twelve foreground blind slats
+PASS  Fans animate when the cinematic clock advances
+PASS  Seeking produces deterministic fan and clock poses
+PASS  No exterior rain overlays interior shot 4
+PASS  No exterior rain overlays interior shot 5
+PASS  No exterior rain overlays interior shot 8
+PASS  No exterior rain overlays interior shot 9
+PASS  No exterior rain overlays interior shot 10
+PASS  No exterior rain overlays interior shot 11
+PASS  No exterior rain overlays interior shot 12
+PASS  No exterior rain overlays interior shot 22
+PASS  No exterior rain overlays interior shot 23
+PASS  No exterior rain overlays interior shot 24
+PASS  No exterior rain overlays interior shot 25
+PASS  No exterior rain overlays interior shot 27
