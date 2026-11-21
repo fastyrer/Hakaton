@@ -1,0 +1,31 @@
+PASS
+PASS  Main menu is the first enabled build scene
+PASS  Menu starts in its normal interactive state
+PASS  Menu releases the mouse cursor
+PASS  Menu has no active gameplay controller
+PASS  Office background consists of real rendered models
+PASS  UI displays a live camera RenderTexture
+PASS  Background is not a video player
+PASS  Menu uses its warm detective colour grade
+PASS  Ceiling fan rotates during menu navigation
+PASS  Ashtray emits visible live smoke
+PASS  Our police officers are present in the background corridor
+PASS  Window lighting casts real blind shadows
+PASS  New game has an unobstructed pointer target
+PASS  Watch introduction has an unobstructed pointer target
+PASS  Settings has an unobstructed pointer target
+PASS  Quit has an unobstructed pointer target
+PASS  Settings button opens its panel
+PASS  Pointer input changes master volume and stores its value
+PASS  Mouse sensitivity is stored for the game
+PASS  Escape closes settings and restores navigation
+PASS  Scene transition fades and blocks duplicate actions
+PASS  Watching the introduction routes back to the menu
+PASS  Menu opens the full Frank's Choice introduction
+PASS  Settings survive watching the intro and returning to the menu
+PASS  Returning does not duplicate the input system
+PASS  New game routes the introduction into gameplay
+PASS  Gameplay applies menu mouse sensitivity
+PASS  Gameplay keeps the selected volume
+PASS  New game starts a fresh investigation
+PASS  Pause menu returns to an interactive main menu

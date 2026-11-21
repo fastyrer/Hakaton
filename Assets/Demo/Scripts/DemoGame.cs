@@ -77,7 +77,7 @@ namespace Hakaton.Demo
                 if (escapePressed) hud.Back();
                 else if (journalPressed && Phase != Stage.Dead && Phase != Stage.Complete)
                 {
-                    if (hud.Mode == DemoHud.Screen.Play || hud.Mode == DemoHud.Screen.Evidence) hud.ShowBoard();
+                    if (hud.Mode == DemoHud.Screen.Play || hud.Mode == DemoHud.Screen.Evidence || hud.Mode == DemoHud.Screen.Document) hud.ShowBoard();
                     else if (hud.Mode == DemoHud.Screen.Board || hud.Mode == DemoHud.Screen.Journal) hud.Play();
                 }
             }
@@ -136,12 +136,13 @@ namespace Hakaton.Demo
             _ => ""
         };
 
+        public static string HomeScene=>Application.CanStreamedLevelBeLoaded("FatherHouse")?"FatherHouse":"HouseArrival";
         public void OpenTravelMenu() => hud.ShowTravelMenu();
 
         public void SelectDestination(string destination)
         {
             SelectedDestination = destination;
-            string scene = destination == "Полицейский участок" ? "PoliceStation" : destination == "Дом Волковых" ? "HouseArrival" : null;
+            string scene = destination == "Полицейский участок" ? "PoliceStation" : destination == "Дом Волковых" ? HomeScene : null;
             if (scene != null && SceneManager.GetActiveScene().name != scene && Application.CanStreamedLevelBeLoaded(scene))
             {
                 InvestigationTravel.Capture(this);

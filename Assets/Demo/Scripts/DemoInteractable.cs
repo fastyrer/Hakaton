@@ -4,7 +4,7 @@ namespace Hakaton.Demo
 {
     public class DemoInteractable : MonoBehaviour
     {
-        public enum Interaction { Evidence, Brother, FuseBox, FrontDoor, Car }
+        public enum Interaction { Evidence, Brother, FuseBox, FrontDoor, Car, Custom }
         public Interaction kind;
         public int evidenceId;
         public string label;

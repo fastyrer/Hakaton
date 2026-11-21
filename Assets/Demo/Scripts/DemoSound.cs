@@ -12,6 +12,7 @@ namespace Hakaton.Demo
 
         void Awake()
         {
+            if(PlayerPrefs.HasKey(DemoPreferences.VolumeKey))AudioListener.volume=DemoPreferences.Volume;
             random = new System.Random(2000);
             local = gameObject.AddComponent<AudioSource>();
             local.spatialBlend = 0;

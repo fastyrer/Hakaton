@@ -9,9 +9,11 @@ namespace Hakaton.Demo
 {
     public sealed class DemoHud : MonoBehaviour
     {
-        public enum Screen { Intro, Play, Evidence, Journal, Dialogue, Pause, Death, Ending, Travel, Board }
+        public enum Screen { Intro, Play, Evidence, Journal, Dialogue, Pause, Death, Ending, Travel, Board, Document }
         public Screen Mode { get; private set; }
         public Material retroMaterial;
+        [Range(180,720)] public int worldVerticalResolution=240;
+        public string locationCaption="НЬЮ-ДЖЕРСИ / ОКТЯБРЬ 2000";
         public Font font;
         public string dialogueText;
         DemoGame game;
@@ -45,13 +47,14 @@ namespace Hakaton.Demo
             raw.raycastTarget = false;
             var retro = gameObject.AddComponent<RetroView>();
             retro.worldCamera = game.player.view;
+            retro.verticalResolution=worldVerticalResolution;
             retro.display = raw;
             retro.displayMaterial = retroMaterial;
             // OnEnable runs before references are assigned; LateUpdate creates the target.
 
             hud = Rect("HUD", transform);
             Stretch(hud);
-            Label(hud, "НЬЮ-ДЖЕРСИ / ОКТЯБРЬ 2000", 42, 26, 700, 24, 14, muted);
+            Label(hud, locationCaption, 42, 26, 700, 24, 14, muted);
             objective = Label(hud, "", 42, 55, 950, 36, 20, ink);
             prompt = Label(hud, "", 300, 582, 680, 40, 19, ink, TextAnchor.MiddleCenter);
             Label(hud, "WASD  ДВИЖЕНИЕ     SHIFT  БЕГ     E  ОСМОТР     F  ФОНАРЬ     TAB  ДОСКА", 100, 673, 1080, 23, 14, muted, TextAnchor.MiddleCenter);
@@ -141,6 +144,13 @@ namespace Hakaton.Demo
             Label(card, "WASD / мышь · Shift — бег · E — действие · F — фонарь\nTab — доска детектива · Esc — пауза", 42, 502, 900, 54, 16, muted);
         }
 
+        public void ShowDocument(string title,string text)
+        {
+            var card=Panel(Screen.Document,"ЛИЧНЫЕ ЗАПИСИ / ДОМ ОТЦА",title);
+            Label(card,text,42,172,900,290,23,ink);
+            Button(card,"ПОЛОЖИТЬ НА МЕСТО [ ESC ]",42,502,916,Play);
+        }
+
         public void ShowEvidence(int id, Screen back)
         {
             evidenceBack = back;
@@ -199,6 +209,12 @@ namespace Hakaton.Demo
             Slider(card, 42, 346, game.sound.Volume, 0, 1, v => game.sound.Volume = v);
             Button(card, "ПРОДОЛЖИТЬ", 42, 436, 430, Play);
             Button(card, "НАЧАТЬ ЗАНОВО", 510, 436, 448, game.Restart);
+            var mainMenu = Button(card, "ГЛАВНОЕ МЕНЮ", 42, 502, 916, () =>
+            {
+                Time.timeScale=1;
+                UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+            });
+            mainMenu.interactable=Application.CanStreamedLevelBeLoaded("MainMenu");
         }
 
         public void ShowDeath()
@@ -244,7 +260,7 @@ namespace Hakaton.Demo
             switch (Mode)
             {
                 case Screen.Play: ShowPause(); break;
-                case Screen.Pause: case Screen.Journal: case Screen.Dialogue: case Screen.Board: Play(); break;
+                case Screen.Pause: case Screen.Journal: case Screen.Dialogue: case Screen.Board: case Screen.Document: Play(); break;
                 case Screen.Evidence: if (evidenceBack == Screen.Board || evidenceBack == Screen.Journal) ShowBoard(); else Play(); break;
                 case Screen.Travel: if (destinationStub) ShowTravelMenu(); else Play(); break;
             }

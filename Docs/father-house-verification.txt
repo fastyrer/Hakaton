@@ -1,0 +1,68 @@
+PASS
+PASS  New game and home destination resolve to FatherHouse
+PASS  Exactly one player and audio listener
+PASS  Fourteen readable personal documents
+PASS  Four movable panels connect three hidden spaces
+PASS  Nine editable anchors reserve places for future puzzles
+PASS  Forest yard is outdoors
+PASS  Front door can be focused from porch
+PASS  Closed front door physically blocks player
+PASS  E opens front door
+PASS  Indoor rain sound is muffled
+PASS  First stair flight reaches physical landing
+PASS  Second flight reaches upstairs without teleport
+PASS  Main stairs can be descended without falling
+PASS  Basement stair descends through real floor opening
+PASS  Basement stair climbs back to ground floor
+PASS  Secret panel can be focused: Тайник · комната наблюдения
+PASS  E slides secret panel: Тайник · комната наблюдения
+PASS  Player walks through secret opening: Тайник · комната наблюдения
+PASS  Secret panel can be focused: Тайник · шкаф в спальне
+PASS  E slides secret panel: Тайник · шкаф в спальне
+PASS  Player walks through secret opening: Тайник · шкаф в спальне
+PASS  Secret panel can be focused: Тайник · выход из скрытой галереи
+PASS  E slides secret panel: Тайник · выход из скрытой галереи
+PASS  Player walks through secret opening: Тайник · выход из скрытой галереи
+PASS  Secret panel can be focused: Тайник · комната за подвальным стеллажом
+PASS  E slides secret panel: Тайник · комната за подвальным стеллажом
+PASS  Player walks through secret opening: Тайник · комната за подвальным стеллажом
+PASS  Clear doorway: Входная дверь
+PASS  Clear doorway: Задняя дверь
+PASS  Clear doorway: Выход на задний балкон
+PASS  Clear doorway: Гостиная
+PASS  Clear doorway: Кабинет отца
+PASS  Clear doorway: Мастерская
+PASS  Clear doorway: Кухонный проход
+PASS  Clear doorway: Кладовая
+PASS  Clear doorway: Дверь в мастерскую
+PASS  Clear doorway: Столовая
+PASS  Clear doorway: Кухня
+PASS  Clear doorway: Из столовой в кухню
+PASS  Clear doorway: Кухонная кладовая
+PASS  Clear doorway: Спуск в подвал
+PASS  Clear doorway: Спальня отца
+PASS  Clear doorway: Библиотека
+PASS  Clear doorway: Семейный архив
+PASS  Clear doorway: Дверь архива
+PASS  Clear doorway: Верхний восточный коридор
+PASS  Clear doorway: Детская комната
+PASS  Clear doorway: Комната карт
+PASS  Clear doorway: Гостевая спальня
+PASS  Clear doorway: Ванная
+PASS  Clear doorway: Комната сыновей
+PASS  Clear doorway: Внутренняя дверь комнаты карт
+PASS  Clear doorway: Котельная
+PASS  Personal note is reachable on table
+PASS  E opens personal note and pauses movement
+PASS  Tab opens detective board from note
+PASS  Escape returns to play
+PASS  House has three original family evidence items
+PASS  Evidence reachable: Взять / осмотреть · Семейная фотография
+PASS  Evidence added to inventory: 0
+PASS  Evidence reachable: Взять / осмотреть · Письмо без конверта
+PASS  Evidence added to inventory: 1
+PASS  Evidence reachable: Взять / осмотреть · Запись о встрече
+PASS  Evidence added to inventory: 2
+PASS  Collected evidence can be added to board
+PASS  Roof blocks all rain inside both floors
+PASS  Central hall remains sheltered

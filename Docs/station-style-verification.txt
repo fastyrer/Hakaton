@@ -1,0 +1,32 @@
+PASS
+PASS  Station has its detailed live interior
+PASS  Twenty-four real windows have blinds
+PASS  Seven fans and five clocks animate the station
+PASS  Fans move in actual gameplay
+PASS  Station details render at the same clarity as the menu
+PASS  Station uses the menu's warm detective colour treatment
+PASS  Harsh checkerboard floor is replaced throughout the building
+PASS  Fourteen workstations have drawer pedestals
+PASS  Two furnished copying stations fill the office
+PASS  All thirty-two NPCs remain in the location
+PASS  Two desk ashtrays emit live smoke
+PASS  Rain remains outside the building, with no indoor drops
+PASS  Weather roof covers 0 / 20
+PASS  Weather roof covers -19 / 1
+PASS  Weather roof covers 19 / 1
+PASS  Weather roof covers -19 / 39
+PASS  Weather roof covers 19 / 39
+PASS  Central walking corridor remains clear
+PASS  Doorway stays traversable: Главный вход
+PASS  Doorway stays traversable: ДЕТЕКТИВЫ
+PASS  Doorway stays traversable: ОПЕРАТИВНЫЙ ЗАЛ
+PASS  Doorway stays traversable: ХРАНИЛИЩЕ / КАМЕРЫ
+PASS  Doorway stays traversable: АРХИВ · 1990—1999
+PASS  Doorway stays traversable: ДЕТЕКТИВНЫЙ ОТДЕЛ
+PASS  Doorway stays traversable: СЛУЖЕБНЫЙ ВХОД
+PASS  Doorway stays traversable: ДЕЖУРНАЯ ЧАСТЬ
+PASS  Doorway stays traversable: АРХИВ
+PASS  Doorway stays traversable: КАМЕРЫ
+PASS  Doorway stays traversable: ДОПРОСНАЯ
+PASS  Doorway stays traversable: ДОПРОСНАЯ
+PASS  Archive retains exactly its three original evidence items

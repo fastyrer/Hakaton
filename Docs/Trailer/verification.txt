@@ -1,0 +1,110 @@
+PASS
+PASS  Thirty shots cover the entire supplied track
+PASS  The supplied Tyler Bates Frank s Choice audio clip is connected
+PASS  Shot 0 has its own camera flight
+PASS  Shot 0 shows the correct character caption
+PASS  Shot 1 has its own camera flight
+PASS  Shot 1 follows without a timeline gap
+PASS  Shot 1 shows the correct character caption
+PASS  Shot 2 has its own camera flight
+PASS  Shot 2 follows without a timeline gap
+PASS  Shot 2 shows the correct character caption
+PASS  Shot 3 has its own camera flight
+PASS  Shot 3 follows without a timeline gap
+PASS  Shot 3 shows the correct character caption
+PASS  Shot 4 has its own camera flight
+PASS  Shot 4 follows without a timeline gap
+PASS  Shot 4 shows the correct character caption
+PASS  Shot 5 has its own camera flight
+PASS  Shot 5 follows without a timeline gap
+PASS  Shot 5 shows the correct character caption
+PASS  Shot 6 has its own camera flight
+PASS  Shot 6 follows without a timeline gap
+PASS  Shot 6 shows the correct character caption
+PASS  Shot 7 has its own camera flight
+PASS  Shot 7 follows without a timeline gap
+PASS  Shot 7 shows the correct character caption
+PASS  Shot 8 has its own camera flight
+PASS  Shot 8 follows without a timeline gap
+PASS  Shot 8 shows the correct character caption
+PASS  Shot 9 has its own camera flight
+PASS  Shot 9 follows without a timeline gap
+PASS  Shot 9 shows the correct character caption
+PASS  Shot 10 has its own camera flight
+PASS  Shot 10 follows without a timeline gap
+PASS  Shot 10 shows the correct character caption
+PASS  Shot 11 has its own camera flight
+PASS  Shot 11 follows without a timeline gap
+PASS  Shot 11 shows the correct character caption
+PASS  Shot 12 has its own camera flight
+PASS  Shot 12 follows without a timeline gap
+PASS  Shot 12 shows the correct character caption
+PASS  Shot 13 has its own camera flight
+PASS  Shot 13 follows without a timeline gap
+PASS  Shot 13 shows the correct character caption
+PASS  Shot 14 has its own camera flight
+PASS  Shot 14 follows without a timeline gap
+PASS  Shot 14 shows the correct character caption
+PASS  Shot 15 has its own camera flight
+PASS  Shot 15 follows without a timeline gap
+PASS  Shot 15 shows the correct character caption
+PASS  Shot 16 has its own camera flight
+PASS  Shot 16 follows without a timeline gap
+PASS  Shot 16 shows the correct character caption
+PASS  Shot 17 has its own camera flight
+PASS  Shot 17 follows without a timeline gap
+PASS  Shot 17 shows the correct character caption
+PASS  Shot 18 has its own camera flight
+PASS  Shot 18 follows without a timeline gap
+PASS  Shot 18 shows the correct character caption
+PASS  Shot 19 has its own camera flight
+PASS  Shot 19 follows without a timeline gap
+PASS  Shot 19 shows the correct character caption
+PASS  Shot 20 has its own camera flight
+PASS  Shot 20 follows without a timeline gap
+PASS  Shot 20 shows the correct character caption
+PASS  Shot 21 has its own camera flight
+PASS  Shot 21 follows without a timeline gap
+PASS  Shot 21 shows the correct character caption
+PASS  Shot 22 has its own camera flight
+PASS  Shot 22 follows without a timeline gap
+PASS  Shot 22 shows the correct character caption
+PASS  Shot 23 has its own camera flight
+PASS  Shot 23 follows without a timeline gap
+PASS  Shot 23 shows the correct character caption
+PASS  Shot 24 has its own camera flight
+PASS  Shot 24 follows without a timeline gap
+PASS  Shot 24 shows the correct character caption
+PASS  Shot 25 has its own camera flight
+PASS  Shot 25 follows without a timeline gap
+PASS  Shot 25 shows the correct character caption
+PASS  Shot 26 has its own camera flight
+PASS  Shot 26 follows without a timeline gap
+PASS  Shot 26 shows the correct character caption
+PASS  Shot 27 has its own camera flight
+PASS  Shot 27 follows without a timeline gap
+PASS  Shot 27 shows the correct character caption
+PASS  Shot 28 has its own camera flight
+PASS  Shot 28 follows without a timeline gap
+PASS  Shot 28 shows the correct character caption
+PASS  Shot 29 has its own camera flight
+PASS  Shot 29 follows without a timeline gap
+PASS  Shot 29 shows the correct character caption
+PASS  Scenario character is introduced: АЛЕКСЕЙ
+PASS  Scenario character is introduced: ИВАН
+PASS  Scenario character is introduced: ДМИТРИЙ
+PASS  Scenario character is introduced: ПАВЕЛ
+PASS  Scenario character is introduced: ФЁДОР
+PASS  Scenario character is introduced: ДЕТЕКТИВ
+PASS  Cigarette smoke has visible rendered particles
+PASS  Rain is hidden during interior shots
+PASS  Original track intro and outro are preserved without added audio fades
+PASS  Both exterior flights show rain
+PASS  Officer escorts the detainee from corridor into isolation wing
+PASS  Magnetic tape reels rotate on the music timeline
+PASS  Three listening agents sit in a separate wiretap room
+PASS  Surveillance figure wears glasses
+PASS  Realtime preview advances with music
+PASS  Pause freezes both camera and music
+PASS  Resume restarts both camera and music
+PASS  Skipping the opening enters the playable game

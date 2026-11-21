@@ -19,7 +19,11 @@ namespace Hakaton.Demo
         float pitch, fallSpeed, stepTime;
         bool interactHeld, flashlightHeld, clickHeld;
 
-        void Awake() => controller = GetComponent<CharacterController>();
+        void Awake()
+        {
+            controller=GetComponent<CharacterController>();
+            if(PlayerPrefs.HasKey(DemoPreferences.MouseKey))sensitivity=DemoPreferences.MouseSensitivity;
+        }
 
         void Update()
         {

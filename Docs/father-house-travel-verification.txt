@@ -1,0 +1,5 @@
+PASS  Car focuses and opens travel destinations
+PASS  Station receives all three family clues and board cards
+PASS  Return route loads FatherHouse and preserves investigation
+PASS  Diner remains a reversible placeholder
+PASS  Menu -> Frank's Choice introduction -> FatherHouse starts fresh investigation
