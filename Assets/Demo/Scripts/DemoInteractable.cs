@@ -21,5 +21,6 @@ namespace Hakaton.Demo
                 case Interaction.Car: game.OpenTravelMenu(); break;
             }
         }
+        public virtual void Highlight(bool on) { }
     }
 }

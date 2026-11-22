@@ -18,6 +18,7 @@ namespace Hakaton.Demo
         CharacterController controller;
         float pitch, fallSpeed, stepTime;
         bool interactHeld, flashlightHeld, clickHeld;
+        DemoInteractable previousFocused;
 
         void Awake()
         {
@@ -79,6 +80,12 @@ namespace Hakaton.Demo
             if (Physics.Raycast(view.ViewportPointToRay(new Vector3(0.5f, 0.5f)), out var hit, 2.7f,
                     ~0, QueryTriggerInteraction.Ignore))
                 Focused = hit.collider.GetComponentInParent<DemoInteractable>();
+            if (previousFocused != null && previousFocused != Focused)
+                previousFocused.Highlight(false);
+            if (Focused != null && Focused != previousFocused)
+                Focused.Highlight(true);
+            previousFocused = Focused;
+
             if (interactPressed && Focused != null) Focused.Interact(game);
             else if (Focused != null && Focused.kind == DemoInteractable.Interaction.Car &&
                 clickPressed)

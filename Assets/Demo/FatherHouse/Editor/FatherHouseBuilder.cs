@@ -41,6 +41,10 @@ namespace Hakaton.Demo.FatherHouse.Editor
                 Materials();Floors();OuterShell();Partitions();Stairs();Exterior();LivingAndDining();StudyAndHidden();KitchenAndWorkshop();BedroomsAndLibrary();Basement();Environment();Dressing();
                 var ambience=location.gameObject.AddComponent<HouseAmbience>();ambience.cameras=cameras.ToArray();
                 ambience.weakBulb=location.lights.GetComponentsInChildren<Light>().FirstOrDefault(l=>l.name=="Лампа котельной");
+                var puzzles=location.gameObject.AddComponent<FatherHousePuzzleSetup>();
+                puzzles.keyMaterial=AssetDatabase.LoadAssetAtPath<Material>("Assets/Demo/Menu/Art/Old_brass.mat");
+                puzzles.lockMaterial=AssetDatabase.LoadAssetAtPath<Material>("Assets/Demo/FatherHouse/Art/Dull_steel.mat");
+                puzzles.lockSymbolMaterial=AssetDatabase.LoadAssetAtPath<Material>("Assets/Demo/FatherHouse/Art/Warning_red.mat");
                 LocationKitOperations.RefreshConnections(location);RecordPrefabOverrides();
                 EditorSceneManager.SaveScene(SceneManager.GetActiveScene(),ScenePath);
                 var list=EditorBuildSettings.scenes.ToList();if(!list.Any(s=>s.path==ScenePath))list.Add(new EditorBuildSettingsScene(ScenePath,true));EditorBuildSettings.scenes=list.ToArray();
@@ -387,6 +391,8 @@ namespace Hakaton.Demo.FatherHouse.Editor
             Desk(new Vector3(-7,0,6.8f),180);Kit("crt",new Vector3(-10.3f,.8f,2.2f),0);Box("Тумба под телевизор",new Vector3(-10.3f,.4f,2.2f),new Vector3(1.6f,.8f,.85f),dark,true);
             var fire=LocalProp("Неиспользуемый камин",new Vector3(-11.65f,0,8.5f),90);Box("Камин",new Vector3(0,.65f,0),new Vector3(2.1f,1.3f,.6f),concrete,true,fire);Box("Зола",new Vector3(0,.3f,-.32f),new Vector3(1.45f,.4f,.04f),ink,false,fire);Box("Каминная полка",new Vector3(0,1.34f,0),new Vector3(2.4f,.15f,.9f),wood,true,fire);
             MenuProp("Настенные часы",new Vector3(-7,2.45f,.2f),180,.85f);MenuProp("Пепельница с тлеющей сигарой",new Vector3(-6.7f,.93f,6.6f),180,.8f);
+            var clockAsset=AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Demo/Art/cuckoo clock by Anonymous/model.obj");
+            if(clockAsset!=null){var clock=(GameObject)PrefabUtility.InstantiatePrefab(clockAsset);clock.name="clock bird";clock.transform.SetParent(group,false);clock.transform.SetPositionAndRotation(new Vector3(-7.76f,2.25f,9.562f),Quaternion.identity);}
             Shelf(new Vector3(-4.2f,0,9.5f),0,2);Kit("clue_0",new Vector3(-7.4f,.94f,6.7f),15);
             Note("Не открывать окна","Камеры не видят полосу под яблонями.\n\nНе открывать окна после девяти. Не отвечать, если назовут меня по имени с улицы.\n\nСегодня снова сдвинут стул. Я оставлял его спинкой к двери.",new Vector3(-6.7f,.94f,6.8f));
             Mess(-11,-3,1,9,0,45);Point("Свет гостиной",new Vector3(-7,2.7f,5),2.0f,9);

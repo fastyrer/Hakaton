@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 namespace Hakaton.Demo
 {
+    public enum PuzzleState { Undiscovered, Available, Started, Solved }
+
     public sealed class DemoGame : MonoBehaviour
     {
         public enum Stage { Explore, Changed, Chase, Dead, Complete }
@@ -25,6 +27,8 @@ namespace Hakaton.Demo
         public Light[] hallLights;
         public DemoInteractable[] evidence;
         public readonly HashSet<int> Found = new HashSet<int>();
+        public readonly Dictionary<string, PuzzleState> PuzzleStates = new Dictionary<string, PuzzleState>();
+        public readonly HashSet<string> Items = new HashSet<string>();
         public bool Blocked => hud.Mode != DemoHud.Screen.Play;
         public bool InKitchen => player.transform.position.x > 2.5f && player.transform.position.z < 3.7f;
         public float ChaseElapsed { get; private set; }
@@ -152,6 +156,18 @@ namespace Hakaton.Demo
             }
             hud.ShowDestinationStub(destination);
         }
+
+        public PuzzleState GetPuzzleState(string id) => !string.IsNullOrWhiteSpace(id) && PuzzleStates.TryGetValue(id, out var state)
+            ? state : PuzzleState.Undiscovered;
+
+        public void SetPuzzleState(string id, PuzzleState state)
+        {
+            if (string.IsNullOrWhiteSpace(id)) return;
+            if (!PuzzleStates.TryGetValue(id, out var current) || state > current) PuzzleStates[id] = state;
+        }
+
+        public bool HasItem(string id) => !string.IsNullOrWhiteSpace(id) && Items.Contains(id);
+        public bool GrantItem(string id) => !string.IsNullOrWhiteSpace(id) && Items.Add(id);
 
         public void Inspect(DemoInteractable item)
         {

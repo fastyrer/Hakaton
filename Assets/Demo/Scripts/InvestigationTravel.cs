@@ -8,14 +8,19 @@ namespace Hakaton.Demo
         static int[] found;
         static List<DetectiveBoard.Entry> entries;
         static readonly Dictionary<int, Texture2D> images = new Dictionary<int, Texture2D>();
+        static readonly Dictionary<string, PuzzleState> puzzles = new Dictionary<string, PuzzleState>();
+        static readonly HashSet<string> items = new HashSet<string>();
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-        public static void Reset() { found = null; entries = null; images.Clear(); }
+        public static void Reset() { found = null; entries = null; images.Clear(); puzzles.Clear(); items.Clear(); }
         public static Texture2D Illustration(int id) => images.TryGetValue(id, out var image) ? image : null;
         public static void Capture(DemoGame game)
         {
             found = new int[game.Found.Count]; game.Found.CopyTo(found);
             entries = new List<DetectiveBoard.Entry>();
             foreach (var entry in game.board.Entries) entries.Add(entry.Copy());
+            puzzles.Clear(); items.Clear();
+            foreach (var pair in game.PuzzleStates) puzzles[pair.Key] = pair.Value;
+            foreach (string item in game.Items) items.Add(item);
             foreach (int id in found)
             { var image = game.EvidenceIllustration(id); if (image != null) images[id] = image; }
         }
@@ -24,7 +29,10 @@ namespace Hakaton.Demo
             if (found == null) return;
             foreach (int id in found) game.Found.Add(id);
             game.board.RestoreEntries(entries);
-            found = null; entries = null;
+            game.PuzzleStates.Clear(); game.Items.Clear();
+            foreach (var pair in puzzles) game.PuzzleStates[pair.Key] = pair.Value;
+            foreach (string item in items) game.Items.Add(item);
+            found = null; entries = null; puzzles.Clear(); items.Clear();
         }
     }
 }
