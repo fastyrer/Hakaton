@@ -115,3 +115,6 @@ InitTestScene*.unity*
 
 # Microsoft Office temporary lock files
 ~$*
+
+# Puzzle verification artifacts (temporary, not for release)
+/_PuzzleVerification/

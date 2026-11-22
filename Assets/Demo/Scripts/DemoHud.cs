@@ -15,6 +15,7 @@ namespace Hakaton.Demo
         [Range(180,720)] public int worldVerticalResolution=240;
         public string locationCaption="НЬЮ-ДЖЕРСИ / ОКТЯБРЬ 2000";
         public Font font;
+        public Font consoleFont;
         public string dialogueText;
         DemoGame game;
         Canvas canvas;
@@ -31,7 +32,10 @@ namespace Hakaton.Demo
         public void Initialize(DemoGame owner)
         {
             game = owner;
-            if (font == null) font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            var loaded = Resources.Load<Font>("Fonts/clacon2");
+            if (loaded != null) font = loaded;
+            else if (consoleFont != null) font = consoleFont;
+            else font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             canvas = gameObject.AddComponent<Canvas>();
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
             var scaler = gameObject.AddComponent<CanvasScaler>();
@@ -184,13 +188,19 @@ namespace Hakaton.Demo
             Button(card, "НАЗАД [ ESC ]", 42, 502, 360, () => { if (presenting) game.Talk(); else Play(); });
         }
 
-        public void ShowDialogue(string text)
+        public void ShowDialogue(string speaker, string text)
         {
             dialogueText = text;
-            var card = Panel(Screen.Dialogue, "ГОСТИНАЯ / РАЗГОВОР", "Антон");
+            var card = Panel(Screen.Dialogue, "РАЗГОВОР", speaker.ToUpperInvariant());
+            Label(card, speaker, 42, 28, 900, 30, 16, amber);
             Label(card, text, 42, 170, 900, 245, 23, ink);
             Button(card, "ПРЕДЪЯВИТЬ УЛИКУ", 42, 436, 430, () => ShowJournal(true));
             Button(card, "ЗАКОНЧИТЬ РАЗГОВОР", 510, 436, 448, Play);
+        }
+
+        public void ShowDialogue(string text)
+        {
+            ShowDialogue("Антон", text);
         }
 
         public void ShowRevelation(string text, Action next)

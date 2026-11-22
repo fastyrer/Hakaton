@@ -3046,6 +3046,10 @@ MonoBehaviour:
   isOpen: 1
   kitchenDoor: 0
   openAngle: -105
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &87183132
 GameObject:
   m_ObjectHideFlags: 0
@@ -3573,6 +3577,10 @@ MonoBehaviour:
   isOpen: 1
   kitchenDoor: 0
   openAngle: -105
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &105742586
 GameObject:
   m_ObjectHideFlags: 0
@@ -36040,6 +36048,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Hakaton.Demo.DemoWeather
   player: {fileID: 780528890}
   rain: {fileID: 139510755}
+  useShelterVolumes: 0
+  shelters: []
 --- !u!1 &852802915
 GameObject:
   m_ObjectHideFlags: 0
@@ -51469,6 +51479,10 @@ MonoBehaviour:
   isOpen: 1
   kitchenDoor: 0
   openAngle: 105
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &1264516066
 GameObject:
   m_ObjectHideFlags: 0
@@ -69325,6 +69339,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -105
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &1709749921
 GameObject:
   m_ObjectHideFlags: 0
@@ -78115,7 +78133,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hakaton.Demo.DemoHud
   retroMaterial: {fileID: 2100000, guid: a5e8c187052584e559a501b205f59058, type: 2}
+  worldVerticalResolution: 240
+  locationCaption: "\u041D\u042C\u042E-\u0414\u0416\u0415\u0420\u0421\u0418 / \u041E\u041A\u0422\u042F\u0411\u0420\u042C 2000"
   font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  consoleFont: {fileID: 12800000, guid: 61e6595feeb04bf4f96f34138fd06b2f, type: 3}
   dialogueText: 
 --- !u!4 &1894706313
 Transform:
@@ -82228,6 +82249,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hakaton.Demo.DemoGame
   arrivalScene: 1
+  locationTitle: 
+  locationIntroduction: 
+  locationObjective: 
   player: {fileID: 780528890}
   hud: {fileID: 1894706312}
   board: {fileID: 1993224766}

@@ -13,6 +13,10 @@ namespace Hakaton.Demo.FatherHouse
 
         void Awake()
         {
+            if (keyMaterial == null) keyMaterial = LoadMaterial("Assets/Demo/Menu/Art/Old_brass.mat", new Color(0.7f, 0.5f, 0.3f));
+            if (lockMaterial == null) lockMaterial = LoadMaterial("Assets/Demo/FatherHouse/Art/Dull_steel.mat", new Color(0.25f, 0.28f, 0.25f));
+            if (lockSymbolMaterial == null) lockSymbolMaterial = LoadMaterial("Assets/Demo/FatherHouse/Art/Warning_red.mat", new Color(0.42f, 0.07f, 0.035f));
+
             var location = FindAnyObjectByType<LocationRoot>();
             if (location == null || location.game == null || !location.game.gameObject.activeInHierarchy) return;
             var doors = location.GetComponentsInChildren<DemoDoor>(true);
@@ -117,6 +121,18 @@ namespace Hakaton.Demo.FatherHouse
                 Box("Скважина", door.transform, position + new Vector3(0, -0.075f, side * 0.031f),
                     new Vector3(0.025f, 0.055f, 0.018f), lockSymbolMaterial);
             }
+        }
+
+        Material LoadMaterial(string path, Color color)
+        {
+#if UNITY_EDITOR
+            var mat = UnityEditor.AssetDatabase.LoadAssetAtPath<Material>(path);
+            if (mat != null) return mat;
+#endif
+            var fallback = new Material(Shader.Find("Universal Render Pipeline/Lit"));
+            fallback.color = color;
+            fallback.name = "Fallback_" + path;
+            return fallback;
         }
 
         static GameObject Box(string name, Transform parent, Vector3 position, Vector3 scale, Material material)
