@@ -16136,6 +16136,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &63031217
 GameObject:
   m_ObjectHideFlags: 0
@@ -72766,6 +72770,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &288989470
 GameObject:
   m_ObjectHideFlags: 0
@@ -88146,6 +88154,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &350284495
 GameObject:
   m_ObjectHideFlags: 0
@@ -98372,6 +98384,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &399575543
 GameObject:
   m_ObjectHideFlags: 0
@@ -127111,6 +127127,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &514049101
 GameObject:
   m_ObjectHideFlags: 0
@@ -205921,6 +205941,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &855942652
 GameObject:
   m_ObjectHideFlags: 0
@@ -208421,6 +208445,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &864617308
 GameObject:
   m_ObjectHideFlags: 0
@@ -223085,6 +223113,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1001 &927396229
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -231274,6 +231306,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &957322374
 GameObject:
   m_ObjectHideFlags: 0
@@ -263535,6 +263571,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &1093791220
 GameObject:
   m_ObjectHideFlags: 0
@@ -277139,6 +277179,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &1144809587
 GameObject:
   m_ObjectHideFlags: 0
@@ -333329,6 +333373,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &1392766112
 GameObject:
   m_ObjectHideFlags: 0
@@ -338151,6 +338199,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &1416417363
 GameObject:
   m_ObjectHideFlags: 0
@@ -342572,6 +342624,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &1431908772
 GameObject:
   m_ObjectHideFlags: 0
@@ -356347,6 +356403,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &1495211561
 GameObject:
   m_ObjectHideFlags: 0
@@ -372028,6 +372088,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4933165981959492657, guid: 482325c7a3c694f06b5a4a966adedccb, type: 3}
+      propertyPath: consoleFont
+      value: 
+      objectReference: {fileID: 12800000, guid: aeb0a03f4689ef34daf7b52294c26d67, type: 3}
+    - target: {fileID: 4933165981959492657, guid: 482325c7a3c694f06b5a4a966adedccb, type: 3}
       propertyPath: retroMaterial
       value: 
       objectReference: {fileID: 2100000, guid: baa8a09571c52437bb237e3116810f94, type: 2}
@@ -384298,6 +384362,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &1608622944
 GameObject:
   m_ObjectHideFlags: 0
@@ -388067,6 +388135,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &1620477971
 GameObject:
   m_ObjectHideFlags: 0
@@ -399936,21 +400008,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1907000001
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1672028531}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d51f608e7c294d35b77398af33e30ad2, type: 3}
-  m_Name:
-  m_EditorClassIdentifier: Assembly-CSharp::Hakaton.Demo.FatherHouse.FatherHousePuzzleSetup
-  keyMaterial: {fileID: 2100000, guid: beb07310aa8784f278be63cd4b5f4344, type: 2}
-  lockMaterial: {fileID: 2100000, guid: 3702b5f015ff64cacb9c36a3071d9669, type: 2}
-  lockSymbolMaterial: {fileID: 2100000, guid: fd2205016a4624834ae045fb1c837a68, type: 2}
 --- !u!114 &1672028532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411073,6 +411130,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &1713318748
 GameObject:
   m_ObjectHideFlags: 0
@@ -422793,6 +422854,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &1769400220
 GameObject:
   m_ObjectHideFlags: 0
@@ -439604,6 +439669,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &1836246320
 GameObject:
   m_ObjectHideFlags: 0
@@ -441828,6 +441897,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1001 &1848480830
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -453677,6 +453750,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &1894887437
 GameObject:
   m_ObjectHideFlags: 0
@@ -456251,6 +456328,21 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1906742078}
   m_Mesh: {fileID: 4300000, guid: 095cd726744d94fc59c3e67052e39bbb, type: 2}
+--- !u!114 &1907000001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1672028531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d51f608e7c294d35b77398af33e30ad2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Hakaton.Demo.FatherHouse.FatherHousePuzzleSetup
+  keyMaterial: {fileID: 2100000, guid: beb07310aa8784f278be63cd4b5f4344, type: 2}
+  lockMaterial: {fileID: 2100000, guid: 3702b5f015ff64cacb9c36a3071d9669, type: 2}
+  lockSymbolMaterial: {fileID: 2100000, guid: fd2205016a4624834ae045fb1c837a68, type: 2}
 --- !u!1 &1907290718
 GameObject:
   m_ObjectHideFlags: 0
@@ -460900,6 +460992,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &1925696230
 GameObject:
   m_ObjectHideFlags: 0
@@ -470580,6 +470676,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &1971711888
 GameObject:
   m_ObjectHideFlags: 0
@@ -476501,6 +476601,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &1996330966
 GameObject:
   m_ObjectHideFlags: 0
@@ -499449,6 +499553,10 @@ MonoBehaviour:
   isOpen: 0
   kitchenDoor: 0
   openAngle: -102
+  lockMode: 0
+  requirement: 
+  lockedMessage: "\u0414\u0432\u0435\u0440\u044C \u0437\u0430\u043F\u0435\u0440\u0442\u0430."
+  unlockedMessage: 
 --- !u!1 &2098028784
 GameObject:
   m_ObjectHideFlags: 0
