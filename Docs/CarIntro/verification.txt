@@ -1,0 +1,33 @@
+PASS
+PASS  Seven cinematic flights fill the complete 31.5-second musical edit
+PASS  Original Deception plays continuously from its opening
+PASS  Cutscene contains no monologue, dialogue subtitles or story spoilers
+PASS  Only the cinematic listener is active; gameplay and HUD are disabled
+PASS  Continuous edit: Салон · мокрое стекло
+PASS  Continuous edit: Фары · низкий пролёт
+PASS  Continuous edit: Машина между деревьями
+PASS  Continuous edit: Дорога сверху
+PASS  Continuous edit: Водитель через стекло
+PASS  Continuous edit: Дом появляется из тумана
+PASS  Continuous edit: Прибытие · название
+PASS  Car travels along the actual forest road
+PASS  Wipers move on the cinematic clock
+PASS  Car wheels rotate on the cinematic clock
+PASS  Seeking produces deterministic car and wiper poses
+PASS  Interior view hides the driver's head while retaining hands and dashboard
+PASS  Exterior views show the full driver model
+PASS  Camera flies through shot: Салон · мокрое стекло
+PASS  Camera flies through shot: Фары · низкий пролёт
+PASS  Camera flies through shot: Машина между деревьями
+PASS  Camera flies through shot: Дорога сверху
+PASS  Camera flies through shot: Водитель через стекло
+PASS  Camera flies through shot: Дом появляется из тумана
+PASS  Camera flies through shot: Прибытие · название
+PASS  Real rain particles render around the moving car
+PASS  Manual dialogue can hold on a visible, stationary cabin frame with no music
+PASS  Explicit post-monologue hook starts camera and original music together
+PASS  Pause freezes both music and vehicle
+PASS  Resume continues the cinematic and music
+PASS  Skipping the cinematic enters the playable father house
+PASS  New Game starts the new car cinematic
+PASS  Natural end enters the house with a fresh investigation

@@ -60,7 +60,7 @@ namespace Hakaton.Demo
                 threat.gameObject.SetActive(false);
             }
             hud.Initialize(this);
-            hud.ShowIntro();
+            if(!CarIntro.CarIntroArrival.TryEnter(this))hud.ShowIntro();
         }
 
         void Update()

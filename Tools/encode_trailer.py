@@ -36,17 +36,26 @@ def main():
     if fade_out > 0:
         filters.append(f'afade=t=out:st={duration-fade_out:.6f}:d={fade_out}')
     args.output.parent.mkdir(parents=True, exist_ok=True)
+    audio_inputs=[]
+    audio_map=['-map', '1:a:0', '-af', ','.join(filters)]
+    if info.get('ambience'):
+        audio_inputs=['-stream_loop', '-1', '-i', info['ambience']]
+        start,end=info['rainRiseStart'],info['rainRiseEnd']
+        q=f"clip((t-{start})/({end-start}),0,1)"
+        gain=f"{info['rainStartVolume']}+({info['rainEndVolume']}-{info['rainStartVolume']})*({q})*({q})*(3-2*({q}))"
+        gain=f"if(isnan(t),{info['rainStartVolume']},{gain})"
+        graph=f"[1:a]{','.join(filters)}[score];[2:a]volume='{gain}':eval=frame[rain];[score][rain]amix=inputs=2:duration=first:normalize=0[sound]"
+        audio_map=['-filter_complex',graph,'-map','[sound]']
     subprocess.run([
         encoder, '-y', '-hide_banner', '-loglevel', 'warning',
         '-framerate', str(info['fps']), '-i', str(args.frames / '%05d.jpg'),
-        '-i', str(music), '-t', f'{duration:.6f}',
-        '-map', '0:v:0', '-map', '1:a:0',
+        '-i', str(music), *audio_inputs, '-t', f'{duration:.6f}',
+        '-map', '0:v:0', *audio_map,
         '-c:v', 'libx264', '-preset', 'medium', '-crf', '18', '-pix_fmt', 'yuv420p',
         '-color_primaries', 'bt709', '-color_trc', 'bt709', '-colorspace', 'bt709',
         '-c:a', 'aac', '-b:a', '256k',
-        '-af', ','.join(filters),
         '-movflags', '+faststart', '-metadata', 'title=Дом помнит — вступление',
-        '-metadata', f'comment=Music: {music.stem}; complete supplied recording',
+        '-metadata', f'comment=Music: {music.stem}; picture edit {duration:.3f}s',
         str(args.output)
     ], check=True)
     print(json.dumps({'output': str(args.output.resolve()), 'duration': duration,

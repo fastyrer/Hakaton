@@ -24,7 +24,7 @@ PASS  Watching the introduction routes back to the menu
 PASS  Menu opens the full Frank's Choice introduction
 PASS  Settings survive watching the intro and returning to the menu
 PASS  Returning does not duplicate the input system
-PASS  New game routes the introduction into gameplay
+PASS  New game starts the thirty-second Deception car cinematic
 PASS  Gameplay applies menu mouse sensitivity
 PASS  Gameplay keeps the selected volume
 PASS  New game starts a fresh investigation

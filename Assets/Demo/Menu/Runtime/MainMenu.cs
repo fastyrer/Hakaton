@@ -43,7 +43,9 @@ namespace Hakaton.Demo.Menu
         }
         public void StartGame()
         {
-            if(IsLoading)return;InvestigationTravel.Reset();MenuNavigation.SetTrailerDestination(DemoGame.HomeScene);Load("OpeningTrailer");
+            if(IsLoading)return;InvestigationTravel.Reset();
+            if(Application.CanStreamedLevelBeLoaded("CarIntro"))Load("CarIntro");
+            else{MenuNavigation.SetTrailerDestination(DemoGame.HomeScene);Load("OpeningTrailer");}
         }
         public void WatchIntroduction()
         {

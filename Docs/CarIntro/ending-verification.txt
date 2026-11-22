@@ -1,0 +1,21 @@
+PASS  Picture uses the original full-length source; music is not replaced with a spliced edit
+PASS  Music fades out over 4.5 seconds; separate recorded rain bed is connected
+PASS  Final shot boundary preserves camera position and orientation
+PASS  There is no black flash between the two arrival shots
+PASS  Car and wheels have stopped before the last music tail
+PASS  Rain remains quiet throughout the handoff
+PASS  Final camera lands and holds before the fade
+PASS  House remains visible throughout the landing hold
+PASS  Only the final outgoing frame is fully black
+PASS  Music stays at full level before its final fade
+PASS  Music passes smoothly through half gain during the fade
+PASS  Music reaches zero before scene loading
+PASS  Home opens under the visual bridge without a second introduction card
+PASS  The parked cinematic car replaces the house blockout exactly once
+PASS  The parked vehicle has no duplicate driver
+PASS  Parked Crown Victoria retains travel interaction and collision
+PASS  Parked windows keep valid materials after cinematic resources are destroyed
+PASS  Fade completes and restores player control
+PASS  Outdoor weather returns to its quiet sound level
+PASS  Home uses the recorded rain without a volume jump
+PASS  One-shot arrival does not leak into later visits

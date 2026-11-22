@@ -1,0 +1,17 @@
+PASS  Cutscene uses the new Crown Victoria rig
+PASS  Actual shell length matches the Ford 212-inch reference
+PASS  Actual shell width matches the Ford 78.2-inch reference
+PASS  Four independent wheels use the 114.7-inch wheelbase
+PASS  Wheel arch is cut into the shell above axle -1.6
+PASS  Wheel arch is cut into the shell above axle 1.31338
+PASS  Six shaped rain windows are connected to the cinematic clock
+PASS  Rain UVs have no collapsed triangles: Лобовое стекло
+PASS  Rain UVs have no collapsed triangles: Заднее стекло
+PASS  Rain UVs have no collapsed triangles: Переднее боковое стекло
+PASS  Rain UVs have no collapsed triangles: Заднее боковое стекло
+PASS  Rain UVs have no collapsed triangles: Переднее боковое стекло
+PASS  Rain UVs have no collapsed triangles: Заднее боковое стекло
+PASS  Wipers, steering and all four wheels retain animation bindings
+PASS  Driver is attached at the new cabin seat
+PASS  All vehicle meshes contain finite coordinates
+PASS  Rear wheel animation works on the new axle

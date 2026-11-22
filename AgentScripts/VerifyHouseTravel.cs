@@ -23,10 +23,10 @@ public static class VerifyHouseTravel
         game=UnityEngine.Object.FindAnyObjectByType<DemoGame>();if(!game.Found.IsSupersetOf(new[]{0,1,2})||game.board.Entries.Count!=cards)throw new Exception("Return state lost");results.Add("PASS  Return route loads FatherHouse and preserves investigation");game.hud.Play();
         game.SelectDestination("Придорожное кафе");if(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name!="FatherHouse"||game.hud.Mode!=DemoHud.Screen.Travel)throw new Exception("Diner stub changed");game.hud.Play();results.Add("PASS  Diner remains a reversible placeholder");
         Time.timeScale=1;UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");await Until(()=>UnityEngine.Object.FindAnyObjectByType<MainMenu>()!=null,30);var menu=UnityEngine.Object.FindAnyObjectByType<MainMenu>();menu.StartGame();
-        await Until(()=>UnityEngine.Object.FindAnyObjectByType<OpeningTrailer>()!=null&&UnityEngine.SceneManagement.SceneManager.GetActiveScene().name=="OpeningTrailer",30);await Seconds(.3);var trailer=UnityEngine.Object.FindAnyObjectByType<OpeningTrailer>();
-        if(trailer.nextScene!="FatherHouse")throw new Exception("New game not routed to new house");trailer.ContinueToGame();
-        await Until(()=>UnityEngine.SceneManagement.SceneManager.GetActiveScene().name=="FatherHouse"&&UnityEngine.Object.FindAnyObjectByType<DemoGame>()?.hud.Mode==DemoHud.Screen.Intro,30);
-        game=UnityEngine.Object.FindAnyObjectByType<DemoGame>();if(game.Found.Count!=0||game.board.Entries.Count!=1)throw new Exception("New game not fresh");results.Add("PASS  Menu -> Frank's Choice introduction -> FatherHouse starts fresh investigation");
+        await Until(()=>UnityEngine.Object.FindAnyObjectByType<Hakaton.Demo.CarIntro.CarIntroSequence>()!=null&&UnityEngine.SceneManagement.SceneManager.GetActiveScene().name=="CarIntro",30);await Seconds(.3);
+        UnityEngine.Object.FindAnyObjectByType<Hakaton.Demo.CarIntro.CarIntroSequence>().Finish();
+        await Until(()=>UnityEngine.SceneManagement.SceneManager.GetActiveScene().name=="FatherHouse"&&UnityEngine.Object.FindAnyObjectByType<DemoGame>()?.hud.Mode==DemoHud.Screen.Play,30);
+        game=UnityEngine.Object.FindAnyObjectByType<DemoGame>();if(game.Found.Count!=0||game.board.Entries.Count!=1)throw new Exception("New game not fresh");results.Add("PASS  Menu -> Deception car introduction -> FatherHouse starts fresh investigation");
         File.WriteAllText("Docs/father-house-travel-verification.txt",string.Join("\n",results));return results.ToArray();
     }
     static Task Seconds(double n){double t=EditorApplication.timeSinceStartup;return Until(()=>EditorApplication.timeSinceStartup>=t+n,n+5);}

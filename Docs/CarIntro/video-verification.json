@@ -1,0 +1,17 @@
+{
+  "file": "/Users/pavelvorotnikov/Hakaton/Builds/Trailers/CarIntro-SoftRain-Deception-31s.mp4",
+  "music": "Assets/Demo/Audio/Dan Wilkie - Deception.mp3",
+  "duration_seconds": 31.5,
+  "frames": 756,
+  "fps": 24,
+  "resolution": "1280x720",
+  "audio_mix_correlation": 0.9999487452386071,
+  "source_start_seconds": 0,
+  "music_splices": [],
+  "music_fade_out_seconds": 4.5,
+  "late_source_continuity_correlation": 0.999882721128041,
+  "maximum_rain_output_rms": 0.0025163775417054446,
+  "last_200ms_music_rms": 0.0036982461134835204,
+  "decode_errors": "",
+  "bytes": 18467240
+}

@@ -4,18 +4,24 @@ namespace Hakaton.Demo
 {
     public sealed class DemoWeather : MonoBehaviour
     {
+        public const float OutdoorRainVolume=.07f,ShelteredRainVolume=.02f;
         public DemoPlayer player;
         public ParticleSystem rain;
         public bool useShelterVolumes;
         public Collider[] shelters;
         public bool IsSheltered { get; private set; }
+        public float RainFade {get;set;}=1;
         AudioSource rainAudio;
         AudioLowPassFilter filter;
         AudioClip rainfall;
+        bool ownsRainfall;
 
         void Start()
         {
-            // Original, seamless noise bed: no external sound assets.
+            rainfall=Resources.Load<AudioClip>("Audio/Rain soft loop");
+            if(rainfall==null)
+            {
+            // Fallback only when the shared recorded asset is absent.
             const int rate = 22050;
             var samples = new float[rate * 4];
             var random = new System.Random(2000);
@@ -28,11 +34,12 @@ namespace Hakaton.Demo
                 samples[i] = (noise * 0.13f + low * 0.75f) * modulation;
             }
             rainfall = AudioClip.Create("Rain outside the house", samples.Length, 1, rate, false);
-            rainfall.SetData(samples, 0);
+            rainfall.SetData(samples, 0);ownsRainfall=true;
+            }
             rainAudio = gameObject.AddComponent<AudioSource>();
             rainAudio.clip = rainfall;
             rainAudio.loop = true;
-            rainAudio.volume = 0.55f;
+            rainAudio.volume = OutdoorRainVolume*RainFade;
             rainAudio.spatialBlend = 0;
             filter = gameObject.AddComponent<AudioLowPassFilter>();
             rainAudio.Play();
@@ -52,13 +59,13 @@ namespace Hakaton.Demo
             }
             else IsSheltered = (Mathf.Abs(p.x) < 9 && p.z > -5 && p.z < 13) ||
                 (Mathf.Abs(p.x) < 2.7f && p.z > -8.8f && p.z < -5);
-            rainAudio.volume = Mathf.MoveTowards(rainAudio.volume, IsSheltered ? 0.15f : 0.55f, Time.unscaledDeltaTime * 0.6f);
-            filter.cutoffFrequency = Mathf.Lerp(filter.cutoffFrequency, IsSheltered ? 1400 : 12000, Time.unscaledDeltaTime * 4);
+            rainAudio.volume = Mathf.MoveTowards(rainAudio.volume, (IsSheltered ? ShelteredRainVolume : OutdoorRainVolume)*RainFade, Time.unscaledDeltaTime * 0.6f);
+            filter.cutoffFrequency = Mathf.Lerp(filter.cutoffFrequency, IsSheltered ? 1400 : 5000, Time.unscaledDeltaTime * 4);
         }
 
         void OnDestroy()
         {
-            if (rainfall != null) Destroy(rainfall);
+            if (ownsRainfall && rainfall != null) Destroy(rainfall);
         }
     }
 }

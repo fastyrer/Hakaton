@@ -68,9 +68,9 @@ public static class VerifyMainMenu
             Check(Mathf.Abs(menu.volume.value-savedVolume)<.001f&&Mathf.Abs(menu.mouse.value-.19f)<.001f,"Settings survive watching the intro and returning to the menu");
             Check(UnityEngine.Object.FindObjectsByType<EventSystem>().Length==1,"Returning does not duplicate the input system");
             Click(menu.newGame);
-            await Until(()=>SceneManager.GetActiveScene().name=="OpeningTrailer"&&UnityEngine.Object.FindAnyObjectByType<OpeningTrailer>()?.music.isPlaying==true,12);
-            trailer=UnityEngine.Object.FindAnyObjectByType<OpeningTrailer>();
-            Check(trailer.nextScene==DemoGame.HomeScene,"New game routes the introduction into gameplay");
+            await Until(()=>SceneManager.GetActiveScene().name=="CarIntro"&&UnityEngine.Object.FindAnyObjectByType<Hakaton.Demo.CarIntro.CarIntroSequence>()?.picture.music.isPlaying==true,12);
+            var carIntro=UnityEngine.Object.FindAnyObjectByType<Hakaton.Demo.CarIntro.CarIntroSequence>();
+            Check(carIntro.picture.Duration==Hakaton.Demo.CarIntro.CarIntroSequence.Length&&carIntro.picture.music.clip.name.Contains("Deception"),"New game starts the Deception car cinematic");
             await Tap(Key.Escape);
             await Until(()=>SceneManager.GetActiveScene().name==DemoGame.HomeScene&&UnityEngine.Object.FindAnyObjectByType<DemoGame>()?.hud.Mode==DemoHud.Screen.Intro,12);
             var game=UnityEngine.Object.FindAnyObjectByType<DemoGame>();

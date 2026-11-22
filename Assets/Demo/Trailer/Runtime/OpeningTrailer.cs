@@ -21,6 +21,7 @@ namespace Hakaton.Demo.Trailer
         public ParticleSystem[] smokeParticles=System.Array.Empty<ParticleSystem>();
         public TrailerStationAmbience stationAmbience;
         public bool externalClock, playOnStart=true;
+        public event System.Action<float> BeforeWorldRender;
         [Range(0,1)] public float musicVolume=.65f;
         [Min(0)] public float musicFadeIn, musicFadeOut;
         public string nextScene="HouseArrival";
@@ -119,6 +120,7 @@ namespace Hakaton.Demo.Trailer
             SetAlpha(fade,1-cut);
             instanceGrade.SetFloat("_TrailerTime",CurrentTime);instanceGrade.SetFloat("_Mono",shot.monochrome?1:0);instanceGrade.SetFloat("_Darken",shot.title?1:0);
             if(music!=null)music.volume=musicVolume*(musicFadeIn>0?Mathf.Clamp01(CurrentTime/musicFadeIn):1)*(musicFadeOut>0?Mathf.Clamp01((Duration-CurrentTime)/musicFadeOut):1);
+            BeforeWorldRender?.Invoke(CurrentTime);
             Canvas.ForceUpdateCanvases();
             RenderPipeline.SubmitRenderRequest(worldCamera,new UniversalRenderPipeline.SingleCameraRequest{destination=world});
         }
