@@ -50286,6 +50286,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarIntroSubtitleTrigger
   subtitleManager: {fileID: 815378646}
   blipSound: {fileID: 8300000, guid: 26fa17fcf40ac944b835f163c739d3ce, type: 3}
+  trigger: 0
+  waitForGameplay: 1
+  startDelay: 0
+  lines: []
+  timePerCharacter: 0.055
+  minLineTime: 2.4
+  maxLineTime: 9
+  zoneCenter: {x: 0, y: 0, z: 0}
+  zoneRadius: 2
+  eventId: 
+  guardFlag: 
 --- !u!1 &162956489
 GameObject:
   m_ObjectHideFlags: 0
@@ -251295,7 +251306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Text
   m_Material: {fileID: 0}
-  m_Color: {r: 0.94716984, g: 0.8911386, b: 0.5986828, a: 1}
+  m_Color: {r: 0.7735849, g: 0.73742306, b: 0.5590245, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -251305,7 +251316,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: aeb0a03f4689ef34daf7b52294c26d67, type: 3}
     m_FontSize: 20
-    m_FontStyle: 1
+    m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
     m_MaxSize: 40

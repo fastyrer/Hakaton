@@ -37,6 +37,26 @@ namespace Hakaton.Demo.FatherHouse
             ConfigureDoor(doors, "Спуск в подвал", DemoDoor.LockMode.Puzzle, "basement_access",
                 "Спуск заперт. Нужно найти способ открыть его.");
             ConfigureClock(location);
+            ConfigurePhone(location);
+        }
+
+        void ConfigurePhone(LocationRoot location)
+        {
+            // Телефон расставлен на сцене вручную; здесь только подключаем взаимодействие.
+            foreach (var piece in location.GetComponentsInChildren<LocationPiece>(true))
+            {
+                if (piece.kitId != "phone" || piece.GetComponent<HousePhone>() != null) continue;
+                if (piece.GetComponent<Collider>() == null)
+                {
+                    var phoneCollider = piece.gameObject.AddComponent<BoxCollider>();
+                    phoneCollider.center = new Vector3(0f, 0.13f, 0f);
+                    phoneCollider.size = new Vector3(0.6f, 0.26f, 0.42f);
+                }
+                var interactable = piece.gameObject.AddComponent<HousePhone>();
+                interactable.kind = DemoInteractable.Interaction.Custom;
+                interactable.evidenceId = -1;
+                interactable.label = "Телефон";
+            }
         }
 
         static DemoDoor ConfigureDoor(DemoDoor[] doors, string doorLabel, DemoDoor.LockMode mode, string requirement, string message)

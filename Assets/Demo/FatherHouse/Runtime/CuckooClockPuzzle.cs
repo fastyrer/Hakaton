@@ -24,7 +24,7 @@ namespace Hakaton.Demo.FatherHouse
                 {
                     case PuzzleState.Started: return "Механизм часов запущен";
                     case PuzzleState.Solved: return "Задний ящик часов открыт";
-                    default: return "Осмотреть · " + label;
+                    default: return "Покрутить стрелки · " + label;
                 }
             }
         }
@@ -81,6 +81,12 @@ namespace Hakaton.Demo.FatherHouse
                 game.hud.Notify("Механизм часов заело. Здесь пока ничего не получить.");
                 return;
             }
+            // Close-up of the face: the back panel opens only when both hands point at 6.
+            game.hud.ShowClockPuzzle(OnFaceSolved);
+        }
+
+        void OnFaceSolved()
+        {
             game.SetPuzzleState(PuzzleId, PuzzleState.Started);
             StartCoroutine(ReleaseKey());
         }

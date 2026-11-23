@@ -21,20 +21,25 @@ namespace Hakaton.Demo.CarIntro
             var rig=sequence.car.GetComponent<CrownVictoriaRig>();if(rig!=null)foreach(Transform driver in rig.driverSocket)driver.gameObject.SetActive(false);
             bridge.rain=sequence.ambience;
             if(bridge.rain!=null){bridge.rain.transform.SetParent(root.transform,false);bridge.rainLevel=Mathf.Min(bridge.rain.volume,CarIntroSequence.RainEndVolume);bridge.rain.volume=bridge.rainLevel;if(!bridge.rain.isPlaying)bridge.rain.Play();}
-            var canvas=root.AddComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=32000;
-            bridge.black=new GameObject("Чёрный кадр",typeof(RectTransform),typeof(Image)).GetComponent<Image>();bridge.black.transform.SetParent(root.transform,false);var r=bridge.black.rectTransform;r.anchorMin=Vector2.zero;r.anchorMax=Vector2.one;r.offsetMin=r.offsetMax=Vector2.zero;bridge.black.color=Color.black;bridge.black.raycastTarget=false;
+            // Canvas lives on a child: descendants of a ScreenSpaceOverlay canvas are forced into
+            // screen space, which would corrupt the parked car parented to this same root.
+            var canvasRoot=new GameObject("Затемнение",typeof(Canvas));canvasRoot.transform.SetParent(root.transform,false);
+            var canvas=canvasRoot.GetComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=32000;
+            bridge.black=new GameObject("Чёрный кадр",typeof(RectTransform),typeof(Image)).GetComponent<Image>();bridge.black.transform.SetParent(canvasRoot.transform,false);var r=bridge.black.rectTransform;r.anchorMin=Vector2.zero;r.anchorMax=Vector2.one;r.offsetMin=r.offsetMax=Vector2.zero;bridge.black.color=Color.black;bridge.black.raycastTarget=false;
             SceneManager.sceneLoaded+=bridge.Loaded;SceneManager.LoadScene(DemoGame.HomeScene);
         }
         void Loaded(Scene scene,LoadSceneMode mode)
         {
             if(scene.name!=DemoGame.HomeScene){Destroy(gameObject);return;}
-            foreach(var piece in FindObjectsByType<LocationPiece>())if(piece.kitId=="car")Destroy(piece.gameObject);
             if(parkedCar!=null)
             {
+                foreach(var piece in FindObjectsByType<LocationPiece>())if(piece.kitId=="car")Destroy(piece.gameObject);
                 parkedCar.SetParent(null,true);SceneManager.MoveGameObjectToScene(parkedCar.gameObject,scene);
+                parkedCar.SetPositionAndRotation(CarIntroSequence.Road(1),CarIntroSequence.Heading(1));
                 if(parkedCar.GetComponent<BoxCollider>()==null){var box=parkedCar.gameObject.AddComponent<BoxCollider>();box.center=new Vector3(0,.72f,0);box.size=new Vector3(1.98628f,1.44f,5.3848f);}
                 var interaction=parkedCar.GetComponent<DemoInteractable>()??parkedCar.gameObject.AddComponent<DemoInteractable>();interaction.kind=DemoInteractable.Interaction.Car;interaction.label="Полицейская машина · выбрать локацию";
             }
+            else Debug.LogWarning("CarIntroArrival: машина из вступления не доехала до сцены, оставляю машину из набора локации.");
             weather=FindObjectsByType<DemoWeather>();foreach(var w in weather)w.RainFade=0;
         }
         public static bool TryEnter(DemoGame owner)

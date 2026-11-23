@@ -51,12 +51,49 @@ public class SubtitleManager : MonoBehaviour
             audioSource.playOnAwake = false;
         }
 
+        // A manager without a wired-up Text builds its own overlay,
+        // so scenes only need the component itself.
+        if (subtitleText == null)
+            CreateDefaultUi();
+
         // Hide subtitle initially
         if (canvasGroup != null)
             canvasGroup.alpha = 0f;
 
         if (subtitleText != null)
             subtitleText.gameObject.SetActive(false);
+    }
+
+    private void CreateDefaultUi()
+    {
+        var canvasObject = new GameObject("Subtitle overlay", typeof(Canvas), typeof(CanvasScaler));
+        canvasObject.transform.SetParent(transform, false);
+        var canvas = canvasObject.GetComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.sortingOrder = 500;
+        var scaler = canvasObject.GetComponent<CanvasScaler>();
+        scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        scaler.referenceResolution = new Vector2(1280, 720);
+        scaler.matchWidthOrHeight = 0.5f;
+
+        var textObject = new GameObject("SubtitleText", typeof(RectTransform), typeof(Text));
+        textObject.transform.SetParent(canvasObject.transform, false);
+        var rect = textObject.GetComponent<RectTransform>();
+        rect.anchorMin = new Vector2(0.18f, 0f);
+        rect.anchorMax = new Vector2(0.83f, 0f);
+        rect.pivot = new Vector2(0.5f, 0f);
+        rect.anchoredPosition = new Vector2(0f, 42f);
+        rect.sizeDelta = new Vector2(0f, 90f);
+        subtitleText = textObject.GetComponent<Text>();
+        subtitleText.font = Resources.Load<Font>("Fonts/clacon2");
+        if (subtitleText.font == null)
+            subtitleText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+        subtitleText.fontSize = 24;
+        subtitleText.alignment = TextAnchor.MiddleCenter;
+        subtitleText.color = new Color(0.89f, 0.85f, 0.74f);
+        subtitleText.horizontalOverflow = HorizontalWrapMode.Wrap;
+        subtitleText.verticalOverflow = VerticalWrapMode.Overflow;
+        subtitleText.raycastTarget = false;
     }
 
     /// <summary>
@@ -71,6 +108,9 @@ public class SubtitleManager : MonoBehaviour
 
         // Don't display text in parentheses - strip them out
         string cleanText = RemoveParentheses(text);
+
+        if (blipSound != null && audioSource != null)
+            audioSource.PlayOneShot(blipSound, blipVolume);
 
         // Set the text and activate
         subtitleText.text = cleanText;

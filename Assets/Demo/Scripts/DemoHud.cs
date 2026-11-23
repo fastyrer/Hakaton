@@ -9,7 +9,7 @@ namespace Hakaton.Demo
 {
     public sealed class DemoHud : MonoBehaviour
     {
-        public enum Screen { Intro, Play, Evidence, Journal, Dialogue, Pause, Death, Ending, Travel, Board, Document }
+        public enum Screen { Intro, Play, Evidence, Journal, Dialogue, Pause, Death, Ending, Travel, Board, Document, Clock, Phone }
         public Screen Mode { get; private set; }
         public Material retroMaterial;
         [Range(180,720)] public int worldVerticalResolution=240;
@@ -24,6 +24,7 @@ namespace Hakaton.Demo
         float toastUntil;
         Screen evidenceBack;
         bool destinationStub;
+        int callSession;
         public DetectiveBoardView CurrentBoard { get; private set; }
         readonly Color ink = new Color(0.89f, 0.85f, 0.74f);
         readonly Color amber = new Color(0.76f, 0.55f, 0.29f);
@@ -84,6 +85,7 @@ namespace Hakaton.Demo
 
         void Clear(Screen screen)
         {
+            callSession++;
             if (CurrentBoard != null) { CurrentBoard.CommitPending(); CurrentBoard = null; }
             if (EventSystem.current != null) EventSystem.current.SetSelectedGameObject(null);
             Mode = screen;
@@ -146,6 +148,64 @@ namespace Hakaton.Demo
             Label(card, "Ты вернулся в семейный дом разобрать вещи отца.\nАнтон ждёт в гостиной. Начни с того, что осталось на виду.\n\nОсматривай предметы. Сопоставляй записи. Задавай вопросы.\nЗапомни дорогу на кухню — там есть свет.", 42, 220, 890, 185, 23, ink);
             Button(card, "ВОЙТИ В ДОМ", 42, 436, 380, () => { Play(); Notify("Антон в гостиной слева. Кабинет — следующая дверь по коридору.", 8); });
             Label(card, "WASD / мышь · Shift — бег · E — действие · F — фонарь\nTab — доска детектива · Esc — пауза", 42, 502, 900, 54, 16, muted);
+        }
+
+        public void ShowPhoneMenu(FatherHouse.HousePhone phone)
+        {
+            var card = Panel(Screen.Phone, "ПРИХОЖАЯ / ТЕЛЕФОН", "Кому позвонить?");
+            bool called = phone.IvanCalled;
+            var partner = Button(card, "НАПАРНИК · НЕ НАБИРАТЬ", 42, 177, 916, () => { });
+            partner.interactable = false;
+            Button(card, called ? "ИВАН · УЖЕ ГОВОРИЛИ" : "ИВАН", 42, 253, 916, () => StartPhoneCall(phone)).interactable = !called;
+            var dmitry = Button(card, "ДМИТРИЙ · НЕ НАБИРАТЬ", 42, 329, 916, () => { });
+            dmitry.interactable = false;
+            Label(card, "Аппарат рабочий. Трубку снимают не везде.", 42, 410, 900, 36, 16, muted);
+            Button(card, "ПОЛОЖИТЬ ТРУБКУ [ ESC ]", 42, 502, 550, Play);
+        }
+
+        void StartPhoneCall(FatherHouse.HousePhone phone)
+        {
+            var card = Panel(Screen.Phone, "ТЕЛЕФОН / РАЗГОВОР", "Иван");
+            var line = Label(card, "", 60, 240, 880, 180, 24, ink, TextAnchor.MiddleCenter);
+            Label(card, "Разговор идёт сам. Esc — положить трубку.", 42, 502, 900, 30, 15, muted);
+            StartCoroutine(PhoneCallRoutine(phone, card, line));
+        }
+
+        System.Collections.IEnumerator PhoneCallRoutine(FatherHouse.HousePhone phone, RectTransform card, Text line)
+        {
+            int session = callSession;
+            var lines = phone.PhotoFound
+                ? Concat(FatherHouse.HousePhone.CallIvan, FatherHouse.HousePhone.CallPhoto)
+                : FatherHouse.HousePhone.CallIvan;
+            foreach (string text in lines)
+            {
+                if (session != callSession || card == null) yield break;
+                line.text = text;
+                float wait = Mathf.Clamp(1.1f + text.Length * 0.05f, 1.6f, 6f);
+                float until = Time.unscaledTime + wait;
+                while (Time.unscaledTime < until && session == callSession) yield return null;
+            }
+            if (session != callSession || card == null) yield break;
+            line.text = "· короткие гудки ·";
+            phone.MarkIvanCalled();
+            Button(card, "ПОЛОЖИТЬ ТРУБКУ [ ESC ]", 42, 436, 550, Play);
+        }
+
+        static string[] Concat(string[] first, string[] second)
+        {
+            var result = new string[first.Length + second.Length];
+            first.CopyTo(result, 0);
+            second.CopyTo(result, first.Length);
+            return result;
+        }
+
+        public void ShowClockPuzzle(Action solved)
+        {
+            var card = Panel(Screen.Clock, "ГОСТИНАЯ / ЧАСЫ С КУКУШКОЙ", "Циферблат");
+            var view = card.gameObject.AddComponent<FatherHouse.ClockFaceView>();
+            view.Initialize(game, font, () => { Play(); solved?.Invoke(); });
+            Label(card, "Стрелки можно тянуть мышью.\nМеханизм отзовётся, когда они встанут правильно.", 42, 170, 250, 120, 16, muted);
+            Button(card, "ОТОЙТИ [ ESC ]", 42, 502, 360, Play);
         }
 
         public void ShowDocument(string title,string text)
@@ -270,7 +330,7 @@ namespace Hakaton.Demo
             switch (Mode)
             {
                 case Screen.Play: ShowPause(); break;
-                case Screen.Pause: case Screen.Journal: case Screen.Dialogue: case Screen.Board: case Screen.Document: Play(); break;
+                case Screen.Pause: case Screen.Journal: case Screen.Dialogue: case Screen.Board: case Screen.Document: case Screen.Clock: case Screen.Phone: Play(); break;
                 case Screen.Evidence: if (evidenceBack == Screen.Board || evidenceBack == Screen.Journal) ShowBoard(); else Play(); break;
                 case Screen.Travel: if (destinationStub) ShowTravelMenu(); else Play(); break;
             }
