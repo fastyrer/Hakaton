@@ -71,7 +71,7 @@ namespace Hakaton.Demo
 
         void Update()
         {
-            if (game == null) return;
+            if (game == null || objective == null) return;
             objective.text = game.Objective;
             prompt.text = game.player.Focused != null && Mode == Screen.Play
                 ? (game.player.Focused.kind == DemoInteractable.Interaction.Car ? "[ E / ЛКМ ]  " : "[ E ]  ") + game.player.Focused.Prompt : "";
@@ -306,6 +306,19 @@ namespace Hakaton.Demo
             destinationStub = false;
             var card = Panel(Screen.Travel, "ПАТРУЛЬНАЯ МАШИНА / МАРШРУТ", "Куда поедем?");
             bool station = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "PoliceStation";
+            if (InvestigationTravel.SafeDiscovered)
+            {
+                Button(card, station ? "ДОМ ВОЛКОВЫХ" : "ДОМ ВОЛКОВЫХ · ВЫ ЗДЕСЬ", 42, 177, 916,
+                    () => game.SelectDestination("Дом Волковых")).interactable = station;
+                Button(card, station ? "ПОЛИЦЕЙСКИЙ УЧАСТОК · ВЫ ЗДЕСЬ" : "ПОЛИЦЕЙСКИЙ УЧАСТОК", 42, 231, 916,
+                    () => game.SelectDestination("Полицейский участок")).interactable = !station;
+                Button(card, "ДОМ ИВАНА", 42, 285, 916, () => game.SelectDestination("Дом Ивана"));
+                Button(card, "ДОМ ДМИТРИЯ", 42, 339, 916, () => game.SelectDestination("Дом Дмитрия"));
+                Button(card, "ДОМ АЛЕКСЕЯ", 42, 393, 916, () => game.SelectDestination("Дом Алексея"));
+                Button(card, "ПРИДОРОЖНОЕ КАФЕ", 42, 447, 916, () => game.SelectDestination("Придорожное кафе"));
+                Button(card, "ОСТАТЬСЯ ЗДЕСЬ [ ESC ]", 42, 514, 550, Play);
+                return;
+            }
             Button(card, station ? "ДОМ ВОЛКОВЫХ" : "ДОМ ВОЛКОВЫХ · ВЫ ЗДЕСЬ", 42, 177, 916,
                 () => game.SelectDestination("Дом Волковых")).interactable = station;
             Button(card, station ? "ПОЛИЦЕЙСКИЙ УЧАСТОК · ВЫ ЗДЕСЬ" : "ПОЛИЦЕЙСКИЙ УЧАСТОК", 42, 253, 916,
@@ -313,6 +326,29 @@ namespace Hakaton.Demo
             Button(card, "ПРИДОРОЖНОЕ КАФЕ", 42, 329, 916, () => game.SelectDestination("Придорожное кафе"));
             Label(card, "Материалы дела и записи на доске останутся с вами.", 42, 422, 900, 36, 18, muted);
             Button(card, "ОСТАТЬСЯ ЗДЕСЬ [ ESC ]", 42, 502, 550, Play);
+        }
+
+        public void ShowSafeFigurines(FatherHouse.StudySafePuzzle safe)
+        {
+            var card = Panel(Screen.Dialogue, "КАБИНЕТ ОТЦА / СЕЙФ", "Четыре места для фигурок");
+            Label(card, "На крышке сейфа четыре углубления. К ним нужны одинаковые фигурки.", 42, 170, 900, 60, 20, ink);
+            var available = safe.AvailableFigurines(game);
+            if (available.Count == 0)
+            {
+                Label(card, safe.PlacedCount >= FatherHouse.StudySafePuzzle.FigurineItems.Length
+                    ? "Все фигурки стоят на своих местах."
+                    : "Подходящих фигурок в инвентаре пока нет. Осталось мест: " + (FatherHouse.StudySafePuzzle.FigurineItems.Length - safe.PlacedCount), 42, 260, 900, 60, 20, muted);
+            }
+            else
+            {
+                for (int i = 0; i < available.Count; i++)
+                {
+                    int index = available[i];
+                    Button(card, "ПОСТАВИТЬ НА МЕСТО · ФИГУРКА (" + FatherHouse.StudySafePuzzle.FigurineNames[index] + ")",
+                        42, 250 + i * 66, 916, () => { Play(); safe.Place(game, index); });
+                }
+            }
+            Button(card, "ОТОЙТИ [ ESC ]", 42, 502, 360, Play);
         }
 
         public void ShowDestinationStub(string destination)

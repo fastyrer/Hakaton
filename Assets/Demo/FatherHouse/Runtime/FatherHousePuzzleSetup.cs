@@ -34,8 +34,9 @@ namespace Hakaton.Demo.FatherHouse
             }
             ConfigureDoor(doors, "Дверь в мастерскую", DemoDoor.LockMode.Puzzle, "workshop_access",
                 "Дверь заперта. Нужно найти способ открыть её.");
-            ConfigureDoor(doors, "Спуск в подвал", DemoDoor.LockMode.Puzzle, "basement_access",
-                "Спуск заперт. Нужно найти способ открыть его.");
+            var basement = ConfigureDoor(doors, "Спуск в подвал", DemoDoor.LockMode.Item, StudySafePuzzle.BasementKeyItem,
+                "Спуск заперт. На замке старый массивный ключ.");
+            if (basement != null) basement.unlockedMessage = "Ключ подошёл. Спуск в подвал открыт.";
             ConfigureClock(location);
             ConfigurePhone(location);
         }

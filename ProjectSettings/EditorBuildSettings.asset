@@ -26,6 +26,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FatherHouse.unity
     guid: ce14dfc5068684a4e8d9e1c6f9394452
+  - enabled: 1
+    path: Assets/Scenes/IvanHouse.unity
+    guid: 1ee0548b459e9574e89d14d4b2e1242e
+  - enabled: 1
+    path: Assets/Scenes/DmitryHouse.unity
+    guid: d1fea44797ae3064b95205b478da2d90
+  - enabled: 1
+    path: Assets/Scenes/AlexeyHouse.unity
+    guid: 5a6671fe5d0d8c54581075bee5a42d0c
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

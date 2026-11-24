@@ -77,9 +77,17 @@ namespace Hakaton.Demo
             }
 
             Focused = null;
-            if (Physics.Raycast(view.ViewportPointToRay(new Vector3(0.5f, 0.5f)), out var hit, 2.7f,
-                    ~0, QueryTriggerInteraction.Ignore))
+            // RaycastAll: when aiming steeply down at close range the crosshair ray can clip
+            // the player's own capsule, which would swallow every interaction.
+            var hits = Physics.RaycastAll(view.ViewportPointToRay(new Vector3(0.5f, 0.5f)), 2.7f,
+                    ~0, QueryTriggerInteraction.Ignore);
+            System.Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+            foreach (var hit in hits)
+            {
+                if (hit.collider.GetComponentInParent<DemoPlayer>() != null) continue;
                 Focused = hit.collider.GetComponentInParent<DemoInteractable>();
+                break;
+            }
             if (previousFocused != null && previousFocused != Focused)
                 previousFocused.Highlight(false);
             if (Focused != null && Focused != previousFocused)

@@ -6,6 +6,7 @@ namespace Hakaton.Demo.FatherHouse
     {
         public string itemId;
         [TextArea] public string successMessage = "Предмет получен.";
+        [TextArea] public string monolog;
         public override string Prompt => "Взять · " + label;
         Renderer pickupRenderer;
         MaterialPropertyBlock propBlock;
@@ -40,6 +41,12 @@ namespace Hakaton.Demo.FatherHouse
             }
             game.sound.Creak(transform.position);
             game.hud.Notify(successMessage, 4);
+            if (!string.IsNullOrWhiteSpace(monolog))
+            {
+                var manager = FindAnyObjectByType<SubtitleManager>();
+                if (manager == null) manager = new GameObject("Subtitles").AddComponent<SubtitleManager>();
+                manager.ShowSubtitle(monolog, Mathf.Clamp(2f + monolog.Length * 0.055f, 3f, 8f));
+            }
             gameObject.SetActive(false);
         }
     }
