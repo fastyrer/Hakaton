@@ -20,13 +20,23 @@ namespace Hakaton.Demo
         Button undo;
         Texture2D cork;
         readonly Dictionary<string, BoardCardDrag> cards = new Dictionary<string, BoardCardDrag>();
+        readonly List<ConnectionLine> lines = new List<ConnectionLine>();
         readonly List<int> sourceIds = new List<int>();
         bool newNote, binding;
+        string linkSource;
         readonly Color ink = new Color(0.88f, 0.85f, 0.75f);
         readonly Color dim = new Color(0.53f, 0.58f, 0.53f);
         readonly Color paperInk = new Color(0.14f, 0.16f, 0.13f);
         readonly Color paper = new Color(0.84f, 0.80f, 0.65f);
+        readonly Color deductionPaper = new Color(0.83f, 0.70f, 0.47f);
         readonly Color panel = new Color(0.055f, 0.073f, 0.063f);
+
+        sealed class ConnectionLine
+        {
+            public DetectiveBoard.Connection data;
+            public RectTransform rect;
+            public Image image;
+        }
 
         public void Initialize(DemoGame owner, Font typeface)
         {
@@ -53,7 +63,8 @@ namespace Hakaton.Demo
             Btn(window, "New note", "+ НОВАЯ ЗАПИСЬ", 268, 98, 174, 34, BeginNewNote, 13);
             undo = Btn(window, "Undo removal", "ВЕРНУТЬ УДАЛЁННУЮ", 800, 98, 172, 34, UndoRemoval, 12);
             status = Label(window, "", 454, 103, 334, 28, 13, dim);
-            Label(window, "ЛКМ — выбрать и перетащить карточку · Tab / Esc — закрыть · изменения сохраняются до нового начала игры", 24, 688, 1232, 22, 13, dim);
+            Label(window, "ЛКМ — перетащить карточку · «Связать» в карточке — нить между уликами · клик по нити — снять · Tab / Esc — закрыть", 24, 688, 1232, 22, 13, dim);
+            SyncConnections();
             SyncCards();
             RefreshInventory();
             if (board.Entries.Count > 0) SelectedId = board.Entries[0].id;
@@ -62,7 +73,11 @@ namespace Hakaton.Demo
             Status("Перетаскивайте карточки мышью");
         }
 
-        void LateUpdate() => Fit();
+        void LateUpdate()
+        {
+            Fit();
+            UpdateLines();
+        }
         void Fit()
         {
             if (window == null) return;
@@ -81,12 +96,43 @@ namespace Hakaton.Demo
         {
             if (board.Find(id) == null) return;
             CommitPending();
+            if (linkSource != null)
+            {
+                SelectedId = id;
+                newNote = false;
+                if (id == linkSource)
+                {
+                    linkSource = null;
+                    Status("Связь отменена");
+                }
+                else
+                {
+                    string source = linkSource;
+                    linkSource = null;
+                    board.Connect(source, id, out var message);
+                    Status(message);
+                }
+                SyncConnections();
+                board.BringToFront(id);
+                SyncCards();
+                RefreshSelection();
+                BindInspector();
+                return;
+            }
             SelectedId = id;
             newNote = false;
             board.BringToFront(id);
             SyncCards();
             RefreshSelection();
             BindInspector();
+        }
+
+        public void BeginLink()
+        {
+            if (SelectedId == null || board.Find(SelectedId) == null) return;
+            CommitPending();
+            linkSource = SelectedId;
+            Status("Выберите вторую карточку для связи · повторный клик по этой — отмена");
         }
 
         public void Move(string id, Vector2 position)
@@ -149,11 +195,81 @@ namespace Hakaton.Demo
         void RemoveSelected()
         {
             CommitPending();
-            if (SelectedId == null || !board.Remove(SelectedId)) return;
+            if (SelectedId == null) return;
+            if (!board.Remove(SelectedId))
+            {
+                var entry = board.Find(SelectedId);
+                if (entry != null && entry.isDeduction) Status("Выводы нельзя убрать — они зафиксированы на доске.");
+                return;
+            }
             SelectedId = null; newNote = false;
             TitleInput = BodyInput = null; SourceInput = null;
-            SyncCards(); RefreshInventory(); BindInspector();
+            SyncCards(); SyncConnections(); RefreshInventory(); BindInspector();
             Status("Карточка убрана · предмет остался в инвентаре");
+        }
+
+        // --- Нити связей между карточками ---
+
+        void SyncConnections()
+        {
+            board.PruneConnections();
+            for (int i = lines.Count - 1; i >= 0; i--)
+            {
+                if (lines[i].data == null || IndexOfConnection(lines[i].data) < 0)
+                { Destroy(lines[i].rect.gameObject); lines.RemoveAt(i); }
+            }
+            foreach (var connection in board.Connections)
+            {
+                if (lines.Exists(l => l.data == connection)) continue;
+                var image = Img(Surface, "Connection thread", new Color(0.55f, 0.56f, 0.5f, 0.5f));
+                image.raycastTarget = true;
+                var button = image.gameObject.AddComponent<Button>();
+                button.targetGraphic = image;
+                var handle = new ConnectionLine { data = connection, rect = image.rectTransform, image = image };
+                button.onClick.AddListener(() => RemoveConnectionAt(handle));
+                lines.Add(handle);
+            }
+            UpdateLines();
+        }
+
+        void RemoveConnectionAt(ConnectionLine handle)
+        {
+            int lineIndex = lines.IndexOf(handle);
+            if (lineIndex < 0) return;
+            int dataIndex = IndexOfConnection(handle.data);
+            if (dataIndex >= 0) board.RemoveConnection(dataIndex);
+            Destroy(handle.rect.gameObject);
+            lines.RemoveAt(lineIndex);
+            Status("Связь снята · сформированные выводы остаются на доске");
+        }
+
+        int IndexOfConnection(DetectiveBoard.Connection target)
+        {
+            var all = board.Connections;
+            for (int i = 0; i < all.Count; i++)
+                if (ReferenceEquals(all[i], target)) return i;
+            return -1;
+        }
+
+        void UpdateLines()
+        {
+            foreach (var handle in lines)
+            {
+                var a = board.Find(handle.data.a);
+                var b = board.Find(handle.data.b);
+                if (a == null || b == null) continue;
+                Vector2 pa = a.position + new Vector2(DetectiveBoard.CardWidth, DetectiveBoard.CardHeight) * 0.5f;
+                Vector2 pb = b.position + new Vector2(DetectiveBoard.CardWidth, DetectiveBoard.CardHeight) * 0.5f;
+                Vector2 d = pb - pa;
+                handle.rect.anchorMin = handle.rect.anchorMax = new Vector2(0, 1);
+                handle.rect.pivot = new Vector2(0, 0.5f);
+                handle.rect.sizeDelta = new Vector2(d.magnitude, handle.data.confirmed ? 5f : 3.5f);
+                handle.rect.anchoredPosition = new Vector2(pa.x, -pa.y);
+                handle.rect.localRotation = Quaternion.Euler(0, 0, Mathf.Atan2(d.y, d.x) * Mathf.Rad2Deg);
+                handle.image.color = handle.data.confirmed
+                    ? new Color(0.62f, 0.13f, 0.08f, 0.95f)
+                    : new Color(0.55f, 0.56f, 0.5f, 0.5f);
+            }
         }
 
         void UndoRemoval()
@@ -198,7 +314,7 @@ namespace Hakaton.Demo
                 int source = id;
                 var item = Img(inventoryList, "Inventory item " + id, new Color(0.092f, 0.115f, 0.095f));
                 Place(item.rectTransform, 6, 3 + row * 144, 216, 136);
-                Label(item.transform, "ПРЕДМЕТ 0" + (id + 1), 10, 8, 198, 18, 11, dim);
+                Label(item.transform, "ПРЕДМЕТ " + DemoGame.EvidenceNumber(id), 10, 8, 198, 18, 11, dim);
                 var photo = Preview(item.transform, game.EvidenceIllustration(id), 10, 33, 42, 42);
                 Label(item.transform, DemoGame.EvidenceTitles[id], 61, 30, 145, 52, 16, ink);
                 var add = Btn(item.transform, "Add evidence " + id, board.HasEvidence(id) ? "ПРИКРЕПЛЕНО" : "НА ДОСКУ", 10, 92, 118, 32, () => AddEvidence(source), 12);
@@ -232,7 +348,7 @@ namespace Hakaton.Demo
 
         BoardCardDrag CreateCard(DetectiveBoard.Entry entry)
         {
-            var image = Img(Surface, "Card " + entry.id, entry.isEvidence ? paper : new Color(0.80f, 0.82f, 0.66f));
+            var image = Img(Surface, "Card " + entry.id, entry.isDeduction ? deductionPaper : entry.isEvidence ? paper : new Color(0.80f, 0.82f, 0.66f));
             Place(image.rectTransform, entry.position.x, entry.position.y, DetectiveBoard.CardWidth, DetectiveBoard.CardHeight);
             var outline = image.gameObject.AddComponent<Outline>();
             var pin = Img(image.transform, "Red pin", new Color(0.46f, 0.12f, 0.07f));
@@ -271,13 +387,24 @@ namespace Hakaton.Demo
             }
             if (!newNote && selected.isEvidence)
             {
-                Label(inspector, "УЛИКА / 0" + (selected.sourceId + 1), 16, 16, 236, 30, 20, ink);
+                Label(inspector, "УЛИКА / " + DemoGame.EvidenceNumber(selected.sourceId), 16, 16, 236, 30, 20, ink);
                 Label(inspector, selected.title, 16, 61, 236, 60, 22, ink);
                 Preview(inspector, game.EvidenceIllustration(selected.sourceId), 62, 130, 144, 144);
                 string preview = selected.text.Length > 210 ? selected.text.Substring(0, 207) + "…" : selected.text;
-                Label(inspector, preview, 16, 291, 236, 154, 17, ink);
-                Btn(inspector, "Read selected evidence", "ЧИТАТЬ УЛИКУ", 16, 464, 236, 40, () => game.hud.ShowEvidence(selected.sourceId, DemoHud.Screen.Board), 15);
-                Btn(inspector, "Remove card", "УБРАТЬ С ДОСКИ", 16, 514, 236, 34, RemoveSelected, 13);
+                Label(inspector, preview, 16, 291, 236, 130, 17, ink);
+                Btn(inspector, "Read selected evidence", "ЧИТАТЬ УЛИКУ", 16, 436, 236, 40, () => game.hud.ShowEvidence(selected.sourceId, DemoHud.Screen.Board), 15);
+                Btn(inspector, "Link selected", "СВЯЗАТЬ С ДРУГОЙ КАРТОЧКОЙ", 16, 484, 236, 34, BeginLink, 13);
+                Btn(inspector, "Remove card", "УБРАТЬ С ДОСКИ", 16, 526, 236, 34, RemoveSelected, 13);
+                binding = false; return;
+            }
+            if (!newNote && selected.isDeduction)
+            {
+                Label(inspector, "ВЫВОД / " + selected.deductionId, 16, 16, 236, 30, 20, ink);
+                Label(inspector, selected.title, 16, 61, 236, 60, 22, ink);
+                Label(inspector, selected.text, 16, 130, 236, 280, 17, ink);
+                Label(inspector, "Соедините с другими карточками — возможно, откроется новый вывод.", 16, 424, 236, 60, 13, dim);
+                Label(inspector, "Нить можно снять кликом, вывод останется.", 16, 488, 236, 34, 13, dim);
+                Btn(inspector, "Link selected", "СВЯЗАТЬ С ДРУГОЙ КАРТОЧКОЙ", 16, 526, 236, 34, BeginLink, 13);
                 binding = false; return;
             }
             Label(inspector, newNote ? "НОВАЯ ЗАПИСЬ" : "ЗАПИСЬ ПО ДЕЛУ", 16, 16, 236, 30, 20, ink);

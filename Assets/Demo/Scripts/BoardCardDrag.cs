@@ -25,8 +25,16 @@ namespace Hakaton.Demo
         {
             title.text = entry.title;
             excerpt.text = entry.text.Length > 148 ? entry.text.Substring(0, 145) + "…" : entry.text;
-            category.text = entry.isEvidence ? "УЛИКА / 0" + (entry.sourceId + 1) : "ЗАПИСЬ ПО ДЕЛУ";
-            source.text = entry.sourceId >= 0 ? "ОСНОВАНИЕ: ПРЕДМЕТ 0" + (entry.sourceId + 1) : "ПОЛЕВЫЕ ЗАПИСИ";
+            if (entry.isDeduction)
+            {
+                category.text = "ВЫВОД / " + entry.deductionId;
+                source.text = "ЗАФИКСИРОВАН НА ДОСКЕ";
+            }
+            else
+            {
+                category.text = entry.isEvidence ? "УЛИКА / " + DemoGame.EvidenceNumber(entry.sourceId) : "ЗАПИСЬ ПО ДЕЛУ";
+                source.text = entry.sourceId >= 0 ? "ОСНОВАНИЕ: ПРЕДМЕТ " + DemoGame.EvidenceNumber(entry.sourceId) : "ПОЛЕВЫЕ ЗАПИСИ";
+            }
             outline.effectColor = selected ? new Color(0.84f, 0.54f, 0.22f) : new Color(0, 0, 0, 0.38f);
             outline.effectDistance = selected ? new Vector2(3, -3) : new Vector2(2, -3);
             rect.anchoredPosition = new Vector2(entry.position.x, -entry.position.y);

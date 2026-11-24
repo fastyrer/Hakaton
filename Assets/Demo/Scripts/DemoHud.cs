@@ -199,6 +199,47 @@ namespace Hakaton.Demo
             return result;
         }
 
+        // Последовательность реплик по сценарию (диалоги с напарником, телефонные звонки).
+        // Состояние прогресса фиксируется ДО открытия окна, чтобы ранний Esc ничего не блокировал.
+        public void ShowLineSequence(string category, string title, string[] lines, bool autoAdvance, Action onDone)
+        {
+            var card = Panel(Screen.Dialogue, category, title);
+            var line = Label(card, "", 60, 200, 880, 220, 24, ink, TextAnchor.MiddleCenter);
+            Label(card, autoAdvance ? "Разговор идёт сам. Esc — прервать." : "Нажимайте «Далее» или Esc.", 42, 502, 900, 30, 15, muted);
+            var next = Button(card, "ДАЛЕЕ", 510, 436, 448, () => { });
+            next.gameObject.SetActive(false);
+            StartCoroutine(LineSequenceRoutine(card, line, next, lines, autoAdvance, onDone));
+        }
+
+        System.Collections.IEnumerator LineSequenceRoutine(RectTransform card, Text line, Button next, string[] lines, bool autoAdvance, Action onDone)
+        {
+            int session = callSession;
+            foreach (string text in lines)
+            {
+                if (session != callSession || card == null) yield break;
+                line.text = text;
+                if (!autoAdvance)
+                {
+                    next.gameObject.SetActive(true);
+                    bool clicked = false;
+                    next.onClick.AddListener(() => clicked = true);
+                    while (!clicked && session == callSession && card != null) yield return null;
+                    next.onClick.RemoveAllListeners();
+                    next.gameObject.SetActive(false);
+                }
+                else
+                {
+                    float wait = Mathf.Clamp(1.1f + text.Length * 0.05f, 1.6f, 6f);
+                    float until = Time.unscaledTime + wait;
+                    while (Time.unscaledTime < until && session == callSession) yield return null;
+                }
+            }
+            if (session != callSession || card == null) yield break;
+            if (onDone != null) { onDone(); onDone = null; }
+            var done = Button(card, "ПРОДОЛЖИТЬ [ ESC ]", 42, 436, 430, Play);
+            done.gameObject.SetActive(true);
+        }
+
         public void ShowClockPuzzle(Action solved)
         {
             var card = Panel(Screen.Clock, "ГОСТИНАЯ / ЧАСЫ С КУКУШКОЙ", "Циферблат");
@@ -218,7 +259,7 @@ namespace Hakaton.Demo
         public void ShowEvidence(int id, Screen back)
         {
             evidenceBack = back;
-            var card = Panel(Screen.Evidence, "ИНВЕНТАРЬ / УЛИКА 0" + (id + 1), DemoGame.EvidenceTitles[id]);
+            var card = Panel(Screen.Evidence, "ИНВЕНТАРЬ / УЛИКА " + DemoGame.EvidenceNumber(id), DemoGame.EvidenceTitles[id]);
             var preview = new GameObject("Document", typeof(RectTransform), typeof(RawImage)).GetComponent<RawImage>();
             preview.transform.SetParent(card, false);
             Place(preview.rectTransform, 42, 174, 248, 248);
@@ -241,7 +282,7 @@ namespace Hakaton.Demo
             {
                 int id = i;
                 bool found = game.Found.Contains(i);
-                var button = Button(card, found ? "0" + (i + 1) + "    " + DemoGame.EvidenceTitles[i] : "0" + (i + 1) + "    — пока не найдено —", 42, 180 + i * 83, 916,
+                var button = Button(card, found ? DemoGame.EvidenceNumber(id) + "    " + DemoGame.EvidenceTitles[id] : DemoGame.EvidenceNumber(id) + "    — пока не найдено —", 42, 180 + i * 83, 916,
                     () => { if (presenting) game.Present(id); else ShowEvidence(id, Screen.Journal); });
                 button.interactable = found;
             }
@@ -299,6 +340,88 @@ namespace Hakaton.Demo
             var card = Panel(Screen.Ending, "КОНЕЦ ПЕРВОГО ПРОТОТИПА", "За дверью стало тихо");
             Label(card, "На кухонном столе лежит папка. Внутри — ещё один адрес.\n\nНо шаги за дверью остановились совсем недавно.\n\nПродолжение следует.", 42, 180, 900, 230, 25, ink);
             Button(card, "ПРОЙТИ ЕЩЁ РАЗ", 42, 436, 460, game.Restart);
+        }
+
+        // --- Финал и две концовки (ТЗ). Все экраны — Screen.Ending: Esc их не закрывает. ---
+
+        public void ShowFinalNote(string heading, string text, Action onRead)
+        {
+            var card = Panel(Screen.Document, "СКРЫТОЕ ХРАНИЛИЩЕ / ЗАПИСКА", heading);
+            Label(card, text, 42, 168, 900, 306, 19, ink);
+            Button(card, "ДАЛЕЕ", 42, 502, 916, () => { Play(); onRead?.Invoke(); });
+        }
+
+        public void ShowFinaleChoice(Action<int> onChoose)
+        {
+            var card = Panel(Screen.Ending, "ФИНАЛ / ВЫБОР", "Что делать с этой правдой?");
+            Label(card, "Расследование закончено. Решение необратимо.", 42, 158, 900, 32, 18, muted);
+            Button(card, "ПРИНЯТЬ ПРАВДУ", 42, 232, 916, () => onChoose(1));
+            Label(card, "Признать произошедшее и рассказать миру правду.", 58, 292, 860, 30, 17, muted);
+            Button(card, "ОТКАЗАТЬСЯ ОТ ПРАВДЫ", 42, 352, 916, () => onChoose(2));
+            Label(card, "Забыть произошедшее и остаться в мире иллюзий.", 58, 412, 860, 30, 17, muted);
+        }
+
+        public void ShowNarration(string category, string title, string text, Action onDone)
+        {
+            var card = Panel(Screen.Ending, category, title);
+            Label(card, text, 60, 176, 880, 300, 23, ink);
+            Button(card, "ДАЛЕЕ", 42, 502, 916, () => onDone?.Invoke());
+        }
+
+        public void ShowNewsReport(string headline, string text, Action onDone)
+        {
+            var card = Panel(Screen.Ending, "НОВОСТИ / ЭФИР", "Срочный выпуск");
+            Label(card, headline, 42, 150, 916, 88, 24, amber);
+            var rule = Image(card, "Rule", muted);
+            Place(rule.rectTransform, 42, 244, 916, 1);
+            Label(card, text, 42, 262, 916, 228, 20, ink);
+            Button(card, "ДАЛЕЕ", 42, 502, 916, () => onDone?.Invoke());
+        }
+
+        public void ShowEndingArt(string endingName, string resourceName)
+        {
+            var card = Panel(Screen.Ending, "КОНЦОВКА", endingName);
+            var rect = Rect("Ending art", card);
+            Place(rect, 42, 148, 916, 330);
+            var raw = rect.gameObject.AddComponent<RawImage>();
+            var texture = Resources.Load<Texture2D>(resourceName);
+            if (texture != null) { raw.texture = texture; raw.color = Color.white; }
+            else raw.color = new Color(0.05f, 0.075f, 0.062f);
+            if (texture == null)
+                Label(card, "Место для иллюстрации · Resources/" + resourceName, 42, 484, 916, 24, 14, muted);
+            Button(card, "В ГЛАВНОЕ МЕНЮ", 42, 514, 916, () =>
+            {
+                Time.timeScale = 1;
+                UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+            });
+        }
+
+        public void FadeThrough(Action midAction) => StartCoroutine(FadeThroughRoutine(midAction));
+
+        System.Collections.IEnumerator FadeThroughRoutine(Action midAction)
+        {
+            int session = callSession;
+            var shadeRect = Rect("Finale fade", transform);
+            Stretch(shadeRect);
+            var shade = shadeRect.gameObject.AddComponent<Image>();
+            shade.raycastTarget = true;
+            float elapsed = 0f;
+            while (elapsed < 2.2f)
+            {
+                elapsed += Time.unscaledDeltaTime;
+                shade.color = new Color(0.004f, 0.006f, 0.005f, Mathf.Clamp01(elapsed / 2.2f));
+                yield return null;
+            }
+            shade.color = new Color(0.004f, 0.006f, 0.005f, 1f);
+            if (session == callSession) midAction?.Invoke();
+            elapsed = 0f;
+            while (elapsed < 1.2f)
+            {
+                elapsed += Time.unscaledDeltaTime;
+                shade.color = new Color(0.004f, 0.006f, 0.005f, 1f - Mathf.Clamp01(elapsed / 1.2f));
+                yield return null;
+            }
+            Destroy(shadeRect.gameObject);
         }
 
         public void ShowTravelMenu()
