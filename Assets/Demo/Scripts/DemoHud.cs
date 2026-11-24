@@ -24,6 +24,7 @@ namespace Hakaton.Demo
         Screen evidenceBack;
         bool destinationStub;
         public DetectiveBoardView CurrentBoard { get; private set; }
+        public Investigation.InvestigationBoardView CaseBoard { get; private set; }
         readonly Color ink = new Color(0.89f, 0.85f, 0.74f);
         readonly Color amber = new Color(0.76f, 0.55f, 0.29f);
         readonly Color muted = new Color(0.53f, 0.56f, 0.51f);
@@ -80,6 +81,7 @@ namespace Hakaton.Demo
 
         void Clear(Screen screen)
         {
+            if(CaseBoard!=null){CaseBoard.Commit();CaseBoard=null;}
             if (CurrentBoard != null) { CurrentBoard.CommitPending(); CurrentBoard = null; }
             if (EventSystem.current != null) EventSystem.current.SetSelectedGameObject(null);
             Mode = screen;
@@ -94,6 +96,11 @@ namespace Hakaton.Demo
         public void ShowBoard()
         {
             Clear(Screen.Board);
+            if(game.investigation!=null)
+            {
+                var caseRoot=Rect("Доска расследования",overlay);Stretch(caseRoot);
+                CaseBoard=caseRoot.gameObject.AddComponent<Investigation.InvestigationBoardView>();CaseBoard.Initialize(game.investigation);return;
+            }
             var root = Rect("Detective board", overlay);
             Stretch(root);
             CurrentBoard = root.gameObject.AddComponent<DetectiveBoardView>();
@@ -117,6 +124,14 @@ namespace Hakaton.Demo
             return modal;
         }
 
+        public RectTransform CasePanel(string category,string title)=>Panel(Screen.Document,category,title);
+        public RectTransform CaseConversationPanel(string who)
+        {
+            Clear(Screen.Dialogue);
+            var p=Rect("Разговор",overlay);p.anchorMin=p.anchorMax=new Vector2(.5f,0);p.pivot=new Vector2(.5f,1);p.anchoredPosition=new Vector2(0,254);p.sizeDelta=new Vector2(1040,232);
+            Investigation.CaseUI.Box(p,"Фон",0,0,1040,232,new Color(.025f,.035f,.028f,.96f));
+            Investigation.CaseUI.Text(p,who,24,14,990,30,20,amber);return p;
+        }
         public void ShowIntro()
         {
             if (!string.IsNullOrWhiteSpace(game.locationTitle))
@@ -202,6 +217,7 @@ namespace Hakaton.Demo
 
         public void ShowPause()
         {
+            game.investigation?.Save();
             var card = Panel(Screen.Pause, "ПАУЗА", "Дом подождёт");
             Label(card, "Чувствительность мыши", 42, 178, 800, 30, 21, ink);
             Slider(card, 42, 229, game.player.sensitivity, 0.03f, 0.3f, v => game.player.sensitivity = v);
@@ -233,6 +249,7 @@ namespace Hakaton.Demo
 
         public void ShowTravelMenu()
         {
+            if(game.investigation!=null){game.investigation.TravelMenu();return;}
             destinationStub = false;
             var card = Panel(Screen.Travel, "ПАТРУЛЬНАЯ МАШИНА / МАРШРУТ", "Куда поедем?");
             bool station = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "PoliceStation";
@@ -257,6 +274,7 @@ namespace Hakaton.Demo
 
         public void Back()
         {
+            if(game.investigation!=null&&game.investigation.ConversationOpen){game.investigation.ResumeConversation();return;}
             switch (Mode)
             {
                 case Screen.Play: ShowPause(); break;

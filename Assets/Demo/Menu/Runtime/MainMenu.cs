@@ -26,7 +26,18 @@ namespace Hakaton.Demo.Menu
             settingsPanel.gameObject.SetActive(false);RefreshValues();
             var c=transition.color;c.a=0;transition.color=c;transition.raycastTarget=false;
         }
-        void Start(){if(EventSystem.current!=null)EventSystem.current.SetSelectedGameObject(newGame.gameObject);}
+        void Start(){
+            if(Investigation.CaseFile.Exists)
+            {
+                var continueButton=Instantiate(newGame,newGame.transform.parent);continueButton.name="Продолжить расследование";
+                continueButton.onClick=new Button.ButtonClickedEvent();continueButton.onClick.AddListener(()=>{Investigation.CaseFile.Reload();Load(Investigation.CaseFile.Current.scene);});
+                var text=continueButton.GetComponentInChildren<Text>();if(text!=null)text.text="ПРОДОЛЖИТЬ";
+                var r=continueButton.GetComponent<RectTransform>();
+                r.anchoredPosition=new Vector2(0,217);r.sizeDelta=new Vector2(340,40);
+                var buttons=new[]{newGame,introduction,settings,quit};for(int i=0;i<buttons.Length;i++){var rect=buttons[i].GetComponent<RectTransform>();rect.anchoredPosition=new Vector2(0,171-i*46);rect.sizeDelta=new Vector2(340,40);}
+                foreach(var button in buttons){foreach(var label in button.GetComponentsInChildren<Text>()){var rect=label.GetComponent<RectTransform>();rect.sizeDelta=new Vector2(rect.sizeDelta.x,40);}}
+            }
+            if(EventSystem.current!=null)EventSystem.current.SetSelectedGameObject(newGame.gameObject);}
         void Update(){if(Keyboard.current!=null&&Keyboard.current.escapeKey.wasPressedThisFrame&&SettingsOpen)CloseSettings();}
         void SetVolume(float value){DemoPreferences.SetVolume(value);RefreshValues();}
         void SetMouse(float value){DemoPreferences.SetMouse(value);RefreshValues();}
@@ -43,7 +54,7 @@ namespace Hakaton.Demo.Menu
         }
         public void StartGame()
         {
-            if(IsLoading)return;InvestigationTravel.Reset();
+            if(IsLoading)return;Investigation.CaseFile.NewGame();InvestigationTravel.Reset();
             if(Application.CanStreamedLevelBeLoaded("CarIntro"))Load("CarIntro");
             else{MenuNavigation.SetTrailerDestination(DemoGame.HomeScene);Load("OpeningTrailer");}
         }

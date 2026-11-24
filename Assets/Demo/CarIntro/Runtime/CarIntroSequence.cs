@@ -43,7 +43,7 @@ namespace Hakaton.Demo.CarIntro
             picture.externalClock=true;picture.playOnStart=false;picture.BeforeWorldRender+=ComposeFrame;
             glass=new Material[rainGlass.Length];sourceGlass=new Material[rainGlass.Length];for(int i=0;i<glass.Length;i++){sourceGlass[i]=rainGlass[i].sharedMaterial;glass[i]=new Material(sourceGlass[i]);rainGlass[i].sharedMaterial=glass[i];}
         }
-        void Start(){if(playOnStart)BeginAfterMonologue();else HoldForMonologue();}
+        void Start(){if(playOnStart&&!Investigation.CaseFile.Current.Done(1)&&Resources.Load<TextAsset>("CaseDialogues")!=null)gameObject.AddComponent<Investigation.CaseCarMonologue>().Initialize(this);else if(playOnStart)BeginAfterMonologue();else HoldForMonologue();}
         public void HoldForMonologue()
         {
             IsPlaying=false;Paused=false;held=0;picture.music.Stop();ambience?.Stop();RenderAt(0);

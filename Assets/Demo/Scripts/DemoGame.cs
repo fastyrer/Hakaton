@@ -25,6 +25,7 @@ namespace Hakaton.Demo
         public Light[] hallLights;
         public DemoInteractable[] evidence;
         public readonly HashSet<int> Found = new HashSet<int>();
+        public Investigation.InvestigationDirector investigation;
         public bool Blocked => hud.Mode != DemoHud.Screen.Play;
         public bool InKitchen => player.transform.position.x > 2.5f && player.transform.position.z < 3.7f;
         public float ChaseElapsed { get; private set; }
@@ -60,6 +61,8 @@ namespace Hakaton.Demo
                 threat.gameObject.SetActive(false);
             }
             hud.Initialize(this);
+            investigation=GetComponent<Investigation.InvestigationDirector>();
+            if(investigation!=null)investigation.Initialize(this);
             if(!CarIntro.CarIntroArrival.TryEnter(this))hud.ShowIntro();
         }
 
@@ -75,13 +78,14 @@ namespace Hakaton.Demo
             if (keyboard != null)
             {
                 if (escapePressed) hud.Back();
-                else if (journalPressed && Phase != Stage.Dead && Phase != Stage.Complete)
+                else if (journalPressed && (investigation==null||!investigation.ConversationOpen) && Phase != Stage.Dead && Phase != Stage.Complete)
                 {
                     if (hud.Mode == DemoHud.Screen.Play || hud.Mode == DemoHud.Screen.Evidence || hud.Mode == DemoHud.Screen.Document) hud.ShowBoard();
                     else if (hud.Mode == DemoHud.Screen.Board || hud.Mode == DemoHud.Screen.Journal) hud.Play();
                 }
             }
             if (Blocked) return;
+            if(investigation!=null)return;
             if (arrivalScene)
             {
                 Vector3 position = player.transform.position;
@@ -125,7 +129,7 @@ namespace Hakaton.Demo
             }
         }
 
-        public string Objective => !string.IsNullOrWhiteSpace(locationObjective) ? locationObjective : arrivalScene
+        public string Objective => investigation!=null?investigation.Objective: !string.IsNullOrWhiteSpace(locationObjective) ? locationObjective : arrivalScene
             ? (HasEnteredHouse ? "Осмотрите дом · машина во дворе открывает выбор локации" : "Войдите в дом · патрульная машина припаркована во дворе")
             : Phase switch
         {
@@ -137,7 +141,7 @@ namespace Hakaton.Demo
         };
 
         public static string HomeScene=>Application.CanStreamedLevelBeLoaded("FatherHouse")?"FatherHouse":"HouseArrival";
-        public void OpenTravelMenu() => hud.ShowTravelMenu();
+        public void OpenTravelMenu() {if(investigation!=null)investigation.TravelMenu();else hud.ShowTravelMenu();}
 
         public void SelectDestination(string destination)
         {
@@ -222,7 +226,7 @@ namespace Hakaton.Demo
             hud.ShowEnding();
         }
 
-        public void Restart() { InvestigationTravel.Reset(); Time.timeScale = 1; SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); }
+        public void Restart() { Investigation.CaseFile.NewGame(); InvestigationTravel.Reset(); Time.timeScale = 1; SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); }
         void OnDestroy() { Cursor.lockState = CursorLockMode.None; Cursor.visible = true; Time.timeScale = 1; }
     }
 }
